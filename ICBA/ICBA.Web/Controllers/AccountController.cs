@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ICBA.Web.Models;
+using ICBA.Data.Models;
 
 namespace ICBA.Web.Controllers
 {

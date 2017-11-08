@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICBA.Web", "ICBA.Web\ICBA.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICBA.UnitTests", "ICBA.UnitTests\ICBA.UnitTests.csproj", "{9BEFCD56-F201-40A3-8D48-96DB02B621CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICBA.Data", "ICBA.Data\ICBA.Data.csproj", "{010D3A13-41AB-4892-8D07-3594C46D6E88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9BEFCD56-F201-40A3-8D48-96DB02B621CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BEFCD56-F201-40A3-8D48-96DB02B621CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BEFCD56-F201-40A3-8D48-96DB02B621CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010D3A13-41AB-4892-8D07-3594C46D6E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010D3A13-41AB-4892-8D07-3594C46D6E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010D3A13-41AB-4892-8D07-3594C46D6E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010D3A13-41AB-4892-8D07-3594C46D6E88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

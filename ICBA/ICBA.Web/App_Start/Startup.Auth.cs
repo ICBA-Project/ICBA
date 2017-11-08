@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ICBA.Web.Models;
+using ICBA.Data;
+using ICBA.Data.Models;
 
 namespace ICBA.Web
 {

@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ICBA.Web.Models;
+using ICBA.Data.Models;
+using ICBA.Data;
 
 namespace ICBA.Web
 {
