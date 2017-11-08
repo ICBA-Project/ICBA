@@ -1,0 +1,13 @@
+﻿.navbar-fixed-top,
+.navbar-fixed-bottom {
+    width: 15%;
+    height: 100%;
+}
+
+.body-content {
+    padding-left: calc(15% + 15px)
+}
+
+.navbar-nav li {
+    width: 100%;
+}
