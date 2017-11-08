@@ -45,7 +45,7 @@
                             </ul>
                         </li>
                     }
-                    @if (Request.IsAuthenticated && User.IsInRole("Administrators"))
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Admin Panel", "About", "Home")</li>
                     }
@@ -53,7 +53,7 @@
                     {
                         <li>@Html.ActionLink("Create Sensor", "About", "Home")</li>
                     }
-                    @if (Request.IsAuthenticated && User.IsInRole("Administrators"))
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Create User", "About", "Home")</li>
                     }
