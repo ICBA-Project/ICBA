@@ -1,15 +1,78 @@
 ﻿@model ICollection<Sensor>
-@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().AccessIsPublic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LastUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OwnerId)
+        </th>
+    </tr>
 
-@foreach (Sensor sensor in Model)
-{
-    <div>
-        @sensor.SensorName
-    </div>
-}
+    @foreach (Sensor sensor in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.SensorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.MeasureType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.PollingInterval)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.AccessIsPublic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.MinRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.MaxRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.LastUpdated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sensor.OwnerId)
+            </td>
+        </tr>
+    }
+</table>

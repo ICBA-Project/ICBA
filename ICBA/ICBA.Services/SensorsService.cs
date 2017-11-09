@@ -12,8 +12,7 @@ namespace ICBA.Services
         public ICollection<Sensor> ReadSensorsAll()
         {
             ICollection<Sensor> sensors = new List<Sensor>();
-            string url = "/api/sensor/all";
-            HttpWebRequest request = WebRequest.Create("http://telerikacademy.icb.bg" + url) as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create("http://telerikacademy.icb.bg/api/sensor/all") as HttpWebRequest;
             request.Headers["auth-token"] = "8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0";
             Stream objStream = request.GetResponse().GetResponseStream();
             StreamReader objReader = new StreamReader(objStream);
