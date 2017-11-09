@@ -33,7 +33,7 @@ namespace ICBA.Services
             sensor.Url = "http://telerikacademy.icb.bg/api/sensor/" + tempSensor.SensorId;
             sensor.MeasureType = tempSensor.MeasureType;
             sensor.PollingInterval = tempSensor.MinPollingIntervalInSeconds;
-
+            sensor.AccessIsPublic = true;
             if (tempSensor.Description.Contains("true or false"))
             {
                 sensor.MinRange = 0;
