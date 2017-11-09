@@ -11,7 +11,7 @@ namespace ICBA.Data.Models
     {
         public Sensor()
         {
-            this.SharedWithUsers = new HashSet<User>();
+            this.SharedWithUsers = new HashSet<ApplicationUser>();
             this.SensorHistory = new HashSet<SensorHistory>();
         }
 
@@ -38,9 +38,9 @@ namespace ICBA.Data.Models
         [Required]
         public string OwnerId { get; set; }
 
-        public virtual ICollection<User> SharedWithUsers { get; set; }
+        public virtual ICollection<ApplicationUser> SharedWithUsers { get; set; }
 
-        public virtual User Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         public virtual ICollection<SensorHistory> SensorHistory { get; set; }
     }

@@ -58,15 +58,14 @@
     <Compile Include="Migrations\201711081851236_Init.Designer.cs">
       <DependentUpon>201711081851236_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711090135324_Models and EF connections.cs" />
-    <Compile Include="Migrations\201711090135324_Models and EF connections.Designer.cs">
-      <DependentUpon>201711090135324_Models and EF connections.cs</DependentUpon>
+    <Compile Include="Migrations\201711091358250_Add tables and connections.cs" />
+    <Compile Include="Migrations\201711091358250_Add tables and connections.Designer.cs">
+      <DependentUpon>201711091358250_Add tables and connections.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorHistory.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +76,8 @@
     <EmbeddedResource Include="Migrations\201711081851236_Init.resx">
       <DependentUpon>201711081851236_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711090135324_Models and EF connections.resx">
-      <DependentUpon>201711090135324_Models and EF connections.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711091358250_Add tables and connections.resx">
+      <DependentUpon>201711091358250_Add tables and connections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,13 +7,13 @@ namespace ICBA.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class ModelsandEFconnections : IMigrationMetadata
+    public sealed partial class Addtablesandconnections : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ModelsandEFconnections));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Addtablesandconnections));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711090135324_Models and EF connections"; }
+            get { return "201711091358250_Add tables and connections"; }
         }
         
         string IMigrationMetadata.Source

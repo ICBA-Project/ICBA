@@ -29,7 +29,7 @@ namespace ICBA.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().
+            modelBuilder.Entity<ApplicationUser>().
                 HasMany(u => u.SharedWithUserSensors)
                 .WithMany(s => s.SharedWithUsers)
                 .Map(us =>
