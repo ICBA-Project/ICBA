@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li class="dropdown">
-                        <a href="/classRoom/Primary" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Public Sensors<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Public Sensors<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("All Public Sensors", "About", "Home")</li>
                             <li>@Html.ActionLink("Temperature Sensors", "About", "Home")</li>
@@ -37,7 +37,7 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li class="dropdown">
-                            <a href="/classRoom/Primary" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Private Sensors<span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Private Sensors<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink("All Private Sensors", "About", "Home")</li>
                                 <li>@Html.ActionLink("Own Sensors", "About", "Home")</li>

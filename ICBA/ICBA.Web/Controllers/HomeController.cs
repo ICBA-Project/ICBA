@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ICBA.Data.Models;
+using ICBA.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,13 @@ namespace ICBA.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ISensorsService sensorsService;
+
+        public HomeController(ISensorsService sensorsService)
+        {
+            this.sensorsService = sensorsService;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -16,8 +25,8 @@ namespace ICBA.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            ICollection<Sensor> sensors = sensorsService.ReadSensorsAll();
+            return View(sensors);
         }
 
         public ActionResult Contact()

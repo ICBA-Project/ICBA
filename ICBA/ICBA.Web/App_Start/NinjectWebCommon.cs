@@ -12,6 +12,7 @@ namespace ICBA.Web.App_Start
     using Ninject.Web.Common;
     using Microsoft.AspNet.Identity.Owin;
     using ICBA.Data;
+    using ICBA.Services;
 
     public static class NinjectWebCommon 
     {
@@ -75,6 +76,9 @@ namespace ICBA.Web.App_Start
                 .GetOwinContext()
                 .GetUserManager<ApplicationDbContext>())
                 .InRequestScope();
+
+            kernel.Bind<ISensorsService>()
+                .To<SensorsService>().InRequestScope();
         }
     }
 }
