@@ -20,5 +20,32 @@ namespace ICBA.Data
         {
             return new ApplicationDbContext();
         }
+
+        public virtual ICollection<Sensor> SharedWithUserSensors { get; set; }
+
+        public virtual ICollection<Sensor> UserSensors { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().
+                HasMany(u => u.SharedWithUserSensors)
+                .WithMany(s => s.SharedWithUsers)
+                .Map(us =>
+                {
+                    us.MapLeftKey("UserRefId");
+                    us.MapRightKey("SensorRefId");
+                    us.ToTable("UserSensor");
+                });
+
+            modelBuilder.Entity<Sensor>()
+                .HasMany(s => s.SensorHistory)
+                .WithRequired(h => h.Sensor);
+        }
+
+        public DbSet<Sensor> Sensors { get; set; }
+
+        public DbSet<SensorHistory> SensorHistory { get; set; }
     }
 }

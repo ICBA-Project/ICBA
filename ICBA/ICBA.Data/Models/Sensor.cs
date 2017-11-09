@@ -36,7 +36,7 @@ namespace ICBA.Data.Models
         public DateTime LastUpdated { get; set; }
 
         [Required]
-        public string OwnerUsername { get; set; }
+        public string OwnerId { get; set; }
 
         public virtual ICollection<User> SharedWithUsers { get; set; }
 
