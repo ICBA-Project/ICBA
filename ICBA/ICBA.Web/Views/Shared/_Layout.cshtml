@@ -1,78 +1,174 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <title>ICBA</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="~/Content/css/fullcalendar.css" />
+    <link rel="stylesheet" href="~/Content/css/matrix-style.css" />
+    <link rel="stylesheet" href="~/Content/css/matrix-media.css" />
+    <link rel="stylesheet" href="~/Content/General.css" />
+    <link href="~/fonts/fonts-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/jquery.gritter.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    @RenderSection("Styles", false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("ICBA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Public Sensors<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("All Public Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Temperature Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Humidity Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Electric Power Consumtion Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Occupancy Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Door Sensors", "About", "Home")</li>
-                            <li>@Html.ActionLink("Noise Sensors", "About", "Home")</li>
-                        </ul>
-                    </li>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Private Sensors<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("All Private Sensors", "About", "Home")</li>
-                                <li>@Html.ActionLink("Own Sensors", "About", "Home")</li>
-                                <li>@Html.ActionLink("Shared Sensors", "About", "Home")</li>
-                            </ul>
-                        </li>
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Admin Panel", "About", "Home")</li>
-                    }
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Create Sensor", "About", "Home")</li>
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Create User", "About", "Home")</li>
-                    }
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <div id="header">
+    </div>
+    <!--close-Header-part-->
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+            @if (Request.IsAuthenticated)
+            {
+                @*<li class=""><a title="" href="@Url.Action("LogOff", "Account")"><i class="icon icon-signout"></i> <span class="text">Logout</span></a></li>*@
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @*<li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>*@
+                <li class=""><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon icon-signout"></i> <span class="text">Logout</span></a></li>
+                }
+            }
+            @if (!Request.IsAuthenticated)
+            {
+                <li class=""><a title="" href="@Url.Action("Login", "Account")"><i class="icon-key"></i> <span class="text">Login</span></a></li>
+            }
+            @if (!Request.IsAuthenticated)
+            {
+                <li class=""><a title="" href="@Url.Action("Register", "Account")"><i class="icon-thumbs-up"></i> <span class="text">Register</span></a></li>
+            }
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+    <div id="sidebar">
+        <ul>
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="icon icon-home"></i> <span>Home</span></a>
+            </li>
+            <li class="submenu">
+                <a href="#">
+                    <i class="icon icon-th-list"></i>
+                    <span>Public Sensors</span> <span class="pull-right icon icon-chevron-down icon-chevron-down-moved-left"></span>
+                </a>
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")">All Public Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Temperature Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Humidity Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Electric Power Consumtion Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Occupancy Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Door Sensors</a></li>
+                    <li><a href="@Url.Action("Index", "Home")">Noise Sensors</a></li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+            </li>
+            @if (Request.IsAuthenticated)
+            {
+                <li class="submenu">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>Private Sensors</span> <span class="pull-right icon icon-chevron-down icon-chevron-down-moved-left"></span></a>
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">All Private Sensors</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Own Sensors</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Shared Sensors</a></li>
+                    </ul>
+                </li>
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Admin Panel", "About", "Home")</li>
+            }
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="@Url.Action("About", "Home")"><i class="icon icon-plus"></i> <span>Create Sensor</span></a></li>
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Create User", "About", "Home")</li>
+            }
+            <li><a href="@Url.Action("Contact", "Home")"><i class="icon icon-pencil"></i> <span>Contact</span></a></li>
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+    <!--main-container-part-->
+    <div id="content">
+        <!--breadcrumbs-->
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+        </div>
+        <!--End-breadcrumbs-->
+        @RenderBody()
+        <!--Action boxes-->
+        <div class="container-fluid">
+            <div>
+
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+    <!--end-main-container-part-->
+    <!--Footer-part-->
+
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2017 &copy; Sensors even down here </div>
     </div>
+
+    <!--end-Footer-part-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/js/excanvas.min.js"></script>
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/jquery.ui.custom.js"></script>
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/jquery.flot.min.js"></script>
+    <script src="~/Scripts/js/jquery.flot.resize.min.js"></script>
+    <script src="~/Scripts/js/jquery.peity.min.js"></script>
+    <script src="~/Scripts/js/fullcalendar.min.js"></script>
+    <script src="~/Scripts/js/matrix.js"></script>
+    <script src="~/Scripts/js/matrix.dashboard.js"></script>
+    <script src="~/Scripts/js/jquery.gritter.min.js"></script>
+    <script src="~/Scripts/js/matrix.interface.js"></script>
+    <script src="~/Scripts/js/matrix.chat.js"></script>
+    <script src="~/Scripts/js/jquery.validate.js"></script>
+    <script src="~/Scripts/js/matrix.form_validation.js"></script>
+    <script src="~/Scripts/js/jquery.wizard.js"></script>
+    <script src="~/Scripts/js/jquery.uniform.js"></script>
+    <script src="~/Scripts/js/select2.min.js"></script>
+    <script src="~/Scripts/js/matrix.popover.js"></script>
+    <script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/js/matrix.tables.js"></script>
+
+    <script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();
+          }
+          // else, send page to designated URL
+          else {
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+    </script>
 </body>
 </html>
