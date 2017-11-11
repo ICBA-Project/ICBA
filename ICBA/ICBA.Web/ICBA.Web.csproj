@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TemperController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,17 +217,41 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap-wysihtml5.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\colorpicker.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\fullcalendar.css" />
+    <Content Include="Content\css\jquery.easy-pie-chart.css" />
+    <Content Include="Content\css\jquery.gritter.css" />
+    <Content Include="Content\css\matrix-login.css" />
+    <Content Include="Content\css\matrix-media.css" />
+    <Content Include="Content\css\matrix-style.css" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\uniform.css" />
+    <Content Include="Content\General.css" />
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\table.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fonts-awesome\css\font-awesome.css" />
+    <Content Include="fonts\fonts-awesome\font\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\github.png" />
+    <Content Include="img\icb.png" />
+    <Content Include="img\telerik-academy-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\fonts-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="fonts\fonts-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fonts-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="fonts\fonts-awesome\font\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -235,10 +260,49 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\bootstrap-colorpicker.js" />
+    <Content Include="Scripts\js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\js\bootstrap-wysihtml5.js" />
+    <Content Include="Scripts\js\bootstrap.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\excanvas.min.js" />
+    <Content Include="Scripts\js\fullcalendar.min.js" />
+    <Content Include="Scripts\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\js\jquery.easy-pie-chart.js" />
+    <Content Include="Scripts\js\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\js\jquery.flot.min.js" />
+    <Content Include="Scripts\js\jquery.flot.pie.js" />
+    <Content Include="Scripts\js\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\js\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\js\jquery.flot.stack.js" />
+    <Content Include="Scripts\js\jquery.gritter.min.js" />
+    <Content Include="Scripts\js\jquery.min.js" />
+    <Content Include="Scripts\js\jquery.peity.min.js" />
+    <Content Include="Scripts\js\jquery.ui.custom.js" />
+    <Content Include="Scripts\js\jquery.uniform.js" />
+    <Content Include="Scripts\js\jquery.validate.js" />
+    <Content Include="Scripts\js\jquery.wizard.js" />
+    <Content Include="Scripts\js\masked.js" />
+    <Content Include="Scripts\js\matrix.calendar.js" />
+    <Content Include="Scripts\js\matrix.charts.js" />
+    <Content Include="Scripts\js\matrix.chat.js" />
+    <Content Include="Scripts\js\matrix.dashboard.js" />
+    <Content Include="Scripts\js\matrix.form_common.js" />
+    <Content Include="Scripts\js\matrix.form_validation.js" />
+    <Content Include="Scripts\js\matrix.interface.js" />
+    <Content Include="Scripts\js\matrix.js" />
+    <Content Include="Scripts\js\matrix.login.js" />
+    <Content Include="Scripts\js\matrix.popover.js" />
+    <Content Include="Scripts\js\matrix.tables.js" />
+    <Content Include="Scripts\js\matrix.wizard.js" />
+    <Content Include="Scripts\js\select2.min.js" />
+    <Content Include="Scripts\js\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -249,32 +313,22 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Temper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
