@@ -22,13 +22,6 @@ namespace ICBA.Web.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            ICollection<Sensor> sensors = sensorsService.ReadSensorsAll();
-            return View(sensors);
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
