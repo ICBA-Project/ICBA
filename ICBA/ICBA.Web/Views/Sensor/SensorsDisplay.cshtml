@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Sensor>
 
+<link rel="stylesheet" href="../../Content/css/matrix-style.css" />
+
 <table class="table fill">
     <tr>
         <th class="text- left">
@@ -81,6 +83,90 @@
                     @Html.DisplayFor(modelItem => sensor.OwnerId)
                 </td>
             </tr>
+            <tr>
+                <div id="content">
+                    <div class="container-fluid">
+                        <hr>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="widget-box">
+                                    <div class="widget-title">
+                                        <span class="icon"> <i class="icon-signal"></i> </span>
+                                        <h5>Sensor value in real time</h5>
+                                    </div>
+                                    <div class="widget-content">
+                                        <div id="placeholder2"></div>
+                                        <p>
+                                            Time between updates:
+                                            <input id="updateInterval" type="text" value="" style="text-align: right; width:5em">
+                                            milliseconds
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
         }
     </tbody>
 </table>
+
+<script src="../../Scripts/js/jquery.min.js"></script>
+<script src="../../Scripts/js/jquery.flot.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    var length = 300;
+    var data = [], totalPoints = 300;
+    while(length--) data.push(0);
+
+    function getRandomData() {
+        if (data.length >= 300)
+            data = data.slice(1);
+
+          $.ajax({
+            url: 'http://telerikacademy.icb.bg/api/sensor/f1796a28-642e-401f-8129-fd7465417061',
+            method:'GET',
+            beforeSend: function(xhr){xhr.setRequestHeader('auth-token', '8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0');},
+            }).done (function (result) {
+              data.push(result.value)
+            }
+          )
+
+          var res = [];
+          for (var i = 0; i < data.length; ++i)
+          res.push([i, data[i]])
+          return res;
+    }
+
+    var updateInterval = 30;
+    $("#updateInterval").val(updateInterval).change(function () {
+        var v = $(this).val();
+        if (v && !isNaN(+v)) {
+            updateInterval = +v;
+            if (updateInterval < 1)
+                updateInterval = 1;
+            if (updateInterval > 2000)
+                updateInterval = 2000;
+            $(this).val("" + updateInterval);
+        }
+    });
+
+    var options = {
+        series: { shadowSize: 0 },
+        yaxis: { min: 15, max: 28 },
+        xaxis: { show: false }
+    };
+    var plot = $.plot($("#placeholder2"), [ getRandomData() ], options);
+
+    function update() {
+        plot.setData([ getRandomData() ]);
+
+        plot.draw();
+
+        setTimeout(update, updateInterval);
+    }
+
+    update();
+});
+</script>

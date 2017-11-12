@@ -94,7 +94,7 @@ hr{ border-top-color:#dadada;}
 /* Top user navigation */
 #user-nav {
 	position: absolute;
-	left: 220px;
+	left: 90%;
 	top:0px;
 	z-index: 20;
 	margin: 0;
@@ -600,13 +600,13 @@ hr{ border-top-color:#dadada;}
 }
 
 #placeholder2 {
-	background-image: url("../../Assets/img/ready.png");
-	background-position: calc(100% - 30px) center;
-	background-color: #cccccc;
+    background-image: url("../../Assests/img/ready.png");
+    background-position: calc(100% - 30px) center;
+    background-color: #cccccc;
 }
 
 .tickLabels {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .widget-box.widget-plain .widget-content {
@@ -1597,4 +1597,9 @@ div.dataTables_wrapper .ui-widget-header {
 	text-align: center;
 }
 #sidebar .content{ display:none;}
+}
+#logoutForm {
+    padding: 9px 10px;
+    display: block;
+    font-size: 11px;
 }
