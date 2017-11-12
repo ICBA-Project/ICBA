@@ -94,7 +94,7 @@ hr{ border-top-color:#dadada;}
 /* Top user navigation */
 #user-nav {
 	position: absolute;
-	left: 90%;
+	left: 220px;
 	top:0px;
 	z-index: 20;
 	margin: 0;
@@ -598,6 +598,17 @@ hr{ border-top-color:#dadada;}
 	padding:15px;
 	border-bottom: 1px solid #cdcdcd;
 }
+
+#placeholder2 {
+	background-image: url("../../Assets/img/ready.png");
+	background-position: calc(100% - 30px) center;
+	background-color: #cccccc;
+}
+
+.tickLabels {
+	font-weight: bold;
+}
+
 .widget-box.widget-plain .widget-content {
 	padding: 12px 0 0;
 }
@@ -1586,9 +1597,4 @@ div.dataTables_wrapper .ui-widget-header {
 	text-align: center;
 }
 #sidebar .content{ display:none;}
-}
-#logoutForm {
-    padding: 9px 10px;
-    display: block;
-    font-size: 11px;
 }
