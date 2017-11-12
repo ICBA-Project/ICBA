@@ -36,13 +36,43 @@ namespace ICBA.Web.Controllers
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == null).ToList();
             return View(sensorsInDb);
         }
+        
+        public ActionResult PublicSensors(string id)
+        {
+            IEnumerable<Sensor> sensorsInDb = new List<Sensor>();
+            switch (id)
+            {
+                case "alli":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true).ToList();
+                    break;
+                case "temp":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && e.MeasureType == "°C").ToList();
+                    break;
+                case "humi":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && e.MeasureType == "%").ToList();
+                    break;
+                case "elec":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && e.MeasureType == "W").ToList();
+                    break;
+                case "occu":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && (e.Url == "http://telerikacademy.icb.bg/api/sensor/4008e030-fd3a-4f8c-a8ca-4f7609ecdb1e" || e.Url == "http://telerikacademy.icb.bg/api/sensor/7a3b1db5-959d-46ce-82b6-517773327427")).ToList();
+                    break;
+                case "door":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && (e.Url == "http://telerikacademy.icb.bg/api/sensor/a3b8a078-0409-4365-ace6-6f8b5b93d592" || e.Url == "http://telerikacademy.icb.bg/api/sensor/ec3c4770-5d57-4d81-9c83-a02140b883a1")).ToList();
+                    break;
+                case "nois":
+                    sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && e.MeasureType == "dB").ToList();
+                    break;
+            }
+            return View("SensorsDisplay", (IEnumerable<Sensor>) sensorsInDb);
+        }
 
         [Authorize]
         public ActionResult OwnSensors()
         {
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList();
-            return View("OwnAndSharedSensors", sensorsInDb);
+            return View("SensorsDisplay", sensorsInDb);
         }
 
         [Authorize]
@@ -50,7 +80,7 @@ namespace ICBA.Web.Controllers
         {
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
-            return View("OwnAndSharedSensors", sensorsInDb);
+            return View("SensorsDisplay", sensorsInDb);
         }
 
         [Authorize]
@@ -65,7 +95,7 @@ namespace ICBA.Web.Controllers
                     sensorsInDb.Add(sensor);
                 }
             }
-            return View("OwnAndSharedSensors", (IEnumerable<Sensor>)sensorsInDb);
+            return View("SensorsDisplay", (IEnumerable<Sensor>)sensorsInDb);
         }
 
         [HttpPost]

@@ -59,13 +59,13 @@
                     <span>Public Sensors</span> <span class="pull-right icon icon-chevron-down icon-chevron-down-moved-left"></span>
                 </a>
                 <ul>
-                    <li><a href="@Url.Action("Index", "Home")">All Public Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Temperature Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Humidity Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Electric Power Consumtion Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Occupancy Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Door Sensors</a></li>
-                    <li><a href="@Url.Action("Index", "Home")">Noise Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "alli" })">All Public Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "temp" })">Temperature Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "humi" })">Humidity Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "elec" })">Electric Power Consumtion Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "occu" })">Occupancy Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "door" })">Door Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "nois" })">Noise Sensors</a></li>
                 </ul>
             </li>
             @if (Request.IsAuthenticated)
