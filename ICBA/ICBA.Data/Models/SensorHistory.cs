@@ -10,13 +10,11 @@ namespace ICBA.Data.Models
     {
         public Guid Id { get; set; }
 
-        public int SensorId { get; set; }
+        public Guid SensorId { get; set; }
 
         public string Value { get; set; }
 
         public DateTime When { get; set; }
-
-        public int Persistence { get; set; }
 
         public virtual Sensor Sensor { get; set; }
     }

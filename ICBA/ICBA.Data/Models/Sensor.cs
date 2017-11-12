@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +34,10 @@ namespace ICBA.Data.Models
 
         public int MaxRange { get; set; }
 
+        public string CurrentValue { get; set; }
+
         public DateTime LastUpdated { get; set; }
 
-        [Required]
         public string OwnerId { get; set; }
 
         public virtual ICollection<ApplicationUser> SharedWithUsers { get; set; }
