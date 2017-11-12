@@ -71,15 +71,6 @@ namespace ICBA.Web.Controllers
                 {
                     throw new Exception();
                 }
-                string currentValue;
-                if (sensor.MinRange == 0)
-                {
-                    currentValue = "false";
-                }
-                else
-                {
-                    currentValue = GetRandomDouble(sensor.MinRange, sensor.MaxRange + 1).ToString();
-                }
                 Sensor sensorToAdd = new Sensor
                 {
                     Id = Guid.NewGuid(),
@@ -91,7 +82,7 @@ namespace ICBA.Web.Controllers
                     AccessIsPublic = sensor.MeasureType == "on" ? true : false,
                     MinRange = sensor.MinRange,
                     MaxRange = sensor.MaxRange,
-                    CurrentValue = currentValue,
+                    CurrentValue = sensorFromDb.CurrentValue,
                     LastUpdated = DateTime.Now.AddSeconds(-300),
                     OwnerId = this.User.Identity.GetUserId()
                 };
