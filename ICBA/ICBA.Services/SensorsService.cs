@@ -109,6 +109,29 @@ namespace ICBA.Services
             }
         }
 
+        public class SensorData
+        {
+            public DateTime TimeStamp
+            {
+                get;
+                set;
+            }
+            public string Value
+            {
+                get;
+                set;
+            }
+            public string ValueType
+            {
+                get;
+                set;
+            }
+            public override string ToString()
+            {
+                return string.Format("[SensorData: TimeStamp={0}, Value={1}, ValueType={2}]", TimeStamp, Value, ValueType);
+            }
+        }
+
         public void WinService()
         {
             List<Guid> sensorsInDb = dbContext.Sensors.Select(n => n.Id).ToList();
@@ -120,11 +143,7 @@ namespace ICBA.Services
                     AddSensorToDatabase(sensor);
                 }
             }
-
-
-
-
-
+            
             foreach (Sensor sensor in dbContext.Sensors.ToList())
             {
                 if (sensor.LastUpdated.AddSeconds(sensor.PollingInterval) < DateTime.Now)
@@ -136,11 +155,26 @@ namespace ICBA.Services
 
         private void UpdateSensorsCurrentValue(Sensor sensor)
         {
-            //Update sensor.LastUpdated = DateTime.Now
-            //Don't forget savechanges
-            //Savechanges once for all sensors? - optimisation (execute queries @ end)
-            //Add to history
-        }
+            HttpWebRequest request = WebRequest.Create(sensor.Url) as HttpWebRequest;
+            request.Headers["auth-token"] = "8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0";
+            Stream objStream = request.GetResponse().GetResponseStream();
+            StreamReader objReader = new StreamReader(objStream);
+            SensorData sensorData = JsonConvert.DeserializeObject<SensorData>(objReader.ReadToEnd());
+
+            dbContext.Sensors.Find(sensor.Id).CurrentValue = sensorData.Value;
+            dbContext.Sensors.Find(sensor.Id).LastUpdated = sensorData.TimeStamp;
+
+            SensorHistory historyEntry = new SensorHistory
+            {
+                Id = Guid.NewGuid(),
+                SensorId = sensor.Id,
+                Value = sensorData.Value,
+                When = sensorData.TimeStamp
+            };
+
+            dbContext.SensorHistory.Add(historyEntry);
+            dbContext.SaveChanges();
+    }
 
         private double GetRandomDouble(int minimum, int maximum)
         {

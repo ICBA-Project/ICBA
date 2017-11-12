@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201711121019260_Remove Persistence column from SensorHistories table.Designer.cs">
       <DependentUpon>201711121019260_Remove Persistence column from SensorHistories table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711121207480_Change SensorId type from int to Guid in SensorHistories table.cs" />
+    <Compile Include="Migrations\201711121207480_Change SensorId type from int to Guid in SensorHistories table.Designer.cs">
+      <DependentUpon>201711121207480_Change SensorId type from int to Guid in SensorHistories table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Sensor.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121019260_Remove Persistence column from SensorHistories table.resx">
       <DependentUpon>201711121019260_Remove Persistence column from SensorHistories table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121207480_Change SensorId type from int to Guid in SensorHistories table.resx">
+      <DependentUpon>201711121207480_Change SensorId type from int to Guid in SensorHistories table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
