@@ -1,8 +1,10 @@
-﻿using ICBA.Data.Models;
+﻿using ICBA.Data;
+using ICBA.Data.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,7 +12,20 @@ namespace ICBA.Services
 {
     public class SensorsService : ISensorsService
     {
-        public ICollection<Sensor> ReadSensorsAll()
+        private ApplicationDbContext dbContext;
+
+        public SensorsService(ApplicationDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        private void AddSensorToDatabase(Sensor sensor)
+        {
+            dbContext.Sensors.Add(sensor);
+            dbContext.SaveChanges();
+        }
+
+        private ICollection<Sensor> ReadSensorsAll()
         {
             ICollection<Sensor> sensors = new List<Sensor>();
             HttpWebRequest request = WebRequest.Create("http://telerikacademy.icb.bg/api/sensor/all") as HttpWebRequest;
@@ -34,7 +49,7 @@ namespace ICBA.Services
             sensor.Url = "http://telerikacademy.icb.bg/api/sensor/" + tempSensor.SensorId;
             sensor.MeasureType = tempSensor.MeasureType;
             sensor.PollingInterval = tempSensor.MinPollingIntervalInSeconds;
-            sensor.AccessIsPublic = true;
+            sensor.AccessIsPublic = false;
             if (tempSensor.Description.Contains("true or false"))
             {
                 sensor.MinRange = 0;
@@ -86,6 +101,15 @@ namespace ICBA.Services
 
         public void WinService()
         {
+            List<Guid> sensorsInDb = dbContext.Sensors.Select(n => n.Id).ToList();
+            IEnumerable<Sensor> sensors = ReadSensorsAll();
+            foreach (Sensor sensor in sensors)
+            {
+                if (!sensorsInDb.Contains(sensor.Id))
+                {
+                    AddSensorToDatabase(sensor);
+                }
+            }
         }
     }
 }

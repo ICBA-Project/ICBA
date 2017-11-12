@@ -330,6 +330,9 @@
     <Content Include="Views\Temp\OldLogin.cshtml" />
     <Content Include="Views\Temper\SensorsTable.cshtml" />
     <Content Include="Views\Sensor\WinService.cshtml" />
+    <Content Include="Views\Sensor\CreateSensor.cshtml" />
+    <Content Include="Views\Sensor\AddedSensor.cshtml" />
+    <Content Include="Views\Sensor\FailedToAddSensor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

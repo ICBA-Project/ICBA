@@ -85,7 +85,7 @@
             }
             @if (Request.IsAuthenticated)
             {
-                <li><a href="@Url.Action("About", "Home")"><i class="icon icon-plus"></i> <span>Create Sensor</span></a></li>
+                <li><a href="@Url.Action("CreateSensor", "Sensor")"><i class="icon icon-plus"></i> <span>Create Sensor</span></a></li>
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {

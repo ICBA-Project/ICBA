@@ -1,0 +1,480 @@
+﻿@model IEnumerable<Sensor>
+
+@{
+    ICollection<string> measureTypes = new List<string>();
+    foreach (Sensor sensor in Model)
+    {
+        if (!measureTypes.Contains(sensor.MeasureType))
+        {
+            measureTypes.Add(sensor.MeasureType);
+        }
+    }
+}
+
+<div class="table1">
+    <span class="icon"> <i class="icon-align-justify"></i> </span>
+    Choose sensor type:
+</div>
+<table class="table-fill table1">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (string measureType in measureTypes)
+        {
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => measureType)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $(".chooseSensor").toggle();
+            $(".table2").toggle();
+            $(".widget-box").toggle();
+        });
+
+        $(".table1").on("click", "td", function () {
+            let selected = $(this).text().trim();
+            if (selected == "°C") {
+                selected = "C";
+            }
+            if (selected == "%") {
+                selected = "perc";
+            }
+            if (selected == "(true/false)") {
+                selected = "truefalse";
+            }
+            $(".table1").toggle();
+            $(".chooseSensor").toggle();
+            $("." + selected).toggle();
+        });
+
+        $(".table2").on("click", "tr", function () {
+            let selected = $(this).text().trim();
+            $(".chooseSensor").toggle();
+            var idOfParent = $(this).parents('table').attr('id');
+            $("#" + idOfParent).toggle();
+            $(".widget-box").toggle();
+            var values = selected.split("\n");
+            values = values.map(string => {
+                return string.trim()
+            })
+            values = arr = values.filter(function(n){ return n != '' });
+            $("#sensorId").html(values[0]);
+            $('#sensorName').attr("placeholder", values[1]);
+            $('#sensorDescription').attr("placeholder", values[2]);
+            $("#sensorUrl").html(values[3]);
+            $('#hiddenSensorUrl').attr("value", values[1]);
+            $("#sensorMeasureType").html(values[4]);
+            $('#sensorPollingInterval').attr("placeholder", parseInt(values[5]));
+            $('#sensorPollingInterval').attr("min", parseInt(values[5]));
+            $('#sensorMinValue').attr("placeholder", parseInt(values[6]));
+            $('#sensorMinValue').attr("min", parseInt(values[6]));
+            $('#sensorMinValue').attr("max", parseInt(values[7]));
+            $('#sensorMaxValue').attr("placeholder", parseInt(values[7]));
+            $('#sensorMaxValue').attr("min", parseInt(values[6]));
+            $('#sensorMaxValue').attr("max", parseInt(values[7]));
+        });
+    </script>
+}
+
+<div class="chooseSensor">
+    <span class="icon"> <i class="icon-align-justify"></i> </span>
+    Choose a sensor:
+</div>
+<table id="1" class="table-fill perc table2">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (Sensor sensor in Model)
+        {
+            if (sensor.MeasureType != "%")
+            {
+                continue;
+            }
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.SensorName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Url)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table id="2" class="table-fill C table2">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (Sensor sensor in Model)
+        {
+            if (sensor.MeasureType != "°C")
+            {
+                continue;
+            }
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.SensorName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Url)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table id="3" class="table-fill truefalse table2">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (Sensor sensor in Model)
+        {
+            if (sensor.MeasureType != "(true/false)")
+            {
+                continue;
+            }
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.SensorName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Url)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table id="4" class="table-fill W table2">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (Sensor sensor in Model)
+        {
+            if (sensor.MeasureType != "W")
+            {
+                continue;
+            }
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.SensorName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Url)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table id="5" class="table-fill dB table2">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().SensorName)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().Url)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MeasureType)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().PollingInterval)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MinRange)
+        </th>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().MaxRange)
+        </th>
+    </tr>
+    <tbody class="table-hover">
+        @foreach (Sensor sensor in Model)
+        {
+            if (sensor.MeasureType != "dB")
+            {
+                continue;
+            }
+            <tr>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.SensorName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.Url)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>Sensor Registration</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <form method="post" action="CreateSensor" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            <div class="control-group">
+                <label class="control-label">Id :</label>
+                <div class="controls">
+                    <div id="sensorId" class="span11"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">URL :</label>
+                <div class="controls">
+                    <div id="sensorUrl" class="span11"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Measure Type :</label>
+                <div class="controls">
+                    <div id="sensorMeasureType" class="span11"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input id="hiddenSensorUrl" name="Url" class="span11" type="hidden" readonly />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Sensor Name :</label>
+                <div class="controls">
+                    <input id="sensorName" name="SensorName" type="text" class="span11" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Description :</label>
+                <div class="controls">
+                    <input id="sensorDescription" name="Description" type="text" class="span11" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Polling Interval :</label>
+                <div class="controls">
+                    <input id="sensorPollingInterval" name="PollingInterval" type="number" class="span11" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Access :</label>
+                <div class="controls">
+                    <input type="checkbox" name="AccessIsPublic" class="span11" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Min Value :</label>
+                <div class="controls">
+                    <input id="sensorMinValue" name="MinRange" type="number" class="span11" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Max Value :</label>
+                <div class="controls">
+                    <input id="sensorMaxValue" name="MaxRange" type="number" class="span11" required />
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

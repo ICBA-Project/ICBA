@@ -9,6 +9,6 @@ namespace ICBA.Services
 {
     public interface ISensorsService
     {
-        ICollection<Sensor> ReadSensorsAll();
+        void WinService();
     }
 }
