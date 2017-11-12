@@ -136,14 +136,16 @@ namespace ICBA.Services
 
         private void UpdateSensorsCurrentValue(Sensor sensor)
         {
-            //update sensor.LastUpdated = DateTime.Now
+            //Update sensor.LastUpdated = DateTime.Now
             //Don't forget savechanges
+            //Savechanges once for all sensors? - optimisation (execute queries @ end)
+            //Add to history
         }
 
         private double GetRandomDouble(int minimum, int maximum)
         {
             Random random = new Random();
-            return random.NextDouble() * (maximum - minimum) + minimum;
+            return Math.Round(random.NextDouble() * (maximum - minimum) + minimum, 2);
         }
     }
 }
