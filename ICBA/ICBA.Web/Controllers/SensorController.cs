@@ -42,7 +42,30 @@ namespace ICBA.Web.Controllers
         {
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList();
-            return View(sensorsInDb);
+            return View("OwnAndSharedSensors", sensorsInDb);
+        }
+
+        [Authorize]
+        public ActionResult SharedSensors()
+        {
+            string currentUserId = this.User.Identity.GetUserId();
+            IEnumerable<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
+            return View("OwnAndSharedSensors", sensorsInDb);
+        }
+
+        [Authorize]
+        public ActionResult PrivateSensors()
+        {
+            string currentUserId = this.User.Identity.GetUserId();
+            ICollection<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
+            foreach (Sensor sensor in dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList())
+            {
+                if (!sensorsInDb.Contains(sensor))
+                {
+                    sensorsInDb.Add(sensor);
+                }
+            }
+            return View("OwnAndSharedSensors", (IEnumerable<Sensor>)sensorsInDb);
         }
 
         [HttpPost]

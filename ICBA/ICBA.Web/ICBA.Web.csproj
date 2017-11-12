@@ -333,7 +333,7 @@
     <Content Include="Views\Sensor\CreateSensor.cshtml" />
     <Content Include="Views\Sensor\AddedSensor.cshtml" />
     <Content Include="Views\Sensor\FailedToAddSensor.cshtml" />
-    <Content Include="Views\Sensor\OwnSensors.cshtml" />
+    <Content Include="Views\Sensor\OwnAndSharedSensors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
