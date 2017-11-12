@@ -33,7 +33,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult CreateSensor()
         {
-            IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.ToList();
+            IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == null).ToList();
             return View(sensorsInDb);
         }
 
@@ -72,7 +72,7 @@ namespace ICBA.Web.Controllers
                     Url = sensorFromDb.Url,
                     MeasureType = sensorFromDb.MeasureType,
                     PollingInterval = sensor.PollingInterval,
-                    AccessIsPublic = sensor.AccessIsPublic,
+                    AccessIsPublic = sensor.MeasureType == "on" ? true : false,
                     MinRange = sensor.MinRange,
                     MaxRange = sensor.MaxRange,
                     LastUpdated = DateTime.Now.AddSeconds(-300),
