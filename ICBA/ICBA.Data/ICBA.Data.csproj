@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201711112101410_OwnerId not required.Designer.cs">
       <DependentUpon>201711112101410_OwnerId not required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711120935153_Add CurrentValue column to Sensors table.cs" />
+    <Compile Include="Migrations\201711120935153_Add CurrentValue column to Sensors table.Designer.cs">
+      <DependentUpon>201711120935153_Add CurrentValue column to Sensors table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711121019260_Remove Persistence column from SensorHistories table.cs" />
+    <Compile Include="Migrations\201711121019260_Remove Persistence column from SensorHistories table.Designer.cs">
+      <DependentUpon>201711121019260_Remove Persistence column from SensorHistories table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Sensor.cs" />
@@ -85,6 +93,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711112101410_OwnerId not required.resx">
       <DependentUpon>201711112101410_OwnerId not required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711120935153_Add CurrentValue column to Sensors table.resx">
+      <DependentUpon>201711120935153_Add CurrentValue column to Sensors table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121019260_Remove Persistence column from SensorHistories table.resx">
+      <DependentUpon>201711121019260_Remove Persistence column from SensorHistories table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

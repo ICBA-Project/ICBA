@@ -61,6 +61,16 @@ namespace ICBA.Services
                 sensor.MinRange = int.Parse(words[6]);
                 sensor.MaxRange = int.Parse(words[8]);
             }
+            string currentValue;
+            if (sensor.MinRange == 0)
+            {
+                currentValue = "false";
+            }
+            else
+            {
+                currentValue = GetRandomDouble(sensor.MinRange, sensor.MaxRange + 1).ToString();
+            }
+            sensor.CurrentValue = currentValue;
             sensor.LastUpdated = DateTime.Now;
             sensor.OwnerId = null;
             return sensor;
@@ -110,6 +120,30 @@ namespace ICBA.Services
                     AddSensorToDatabase(sensor);
                 }
             }
+
+
+
+
+
+            foreach (Sensor sensor in dbContext.Sensors.ToList())
+            {
+                if (sensor.LastUpdated.AddSeconds(sensor.PollingInterval) < DateTime.Now)
+                {
+                    UpdateSensorsCurrentValue(sensor);
+                }
+            }
+        }
+
+        private void UpdateSensorsCurrentValue(Sensor sensor)
+        {
+            //update sensor.LastUpdated = DateTime.Now
+            //Don't forget savechanges
+        }
+
+        private double GetRandomDouble(int minimum, int maximum)
+        {
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
         }
     }
 }

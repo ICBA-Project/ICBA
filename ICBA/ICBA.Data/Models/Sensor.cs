@@ -34,6 +34,8 @@ namespace ICBA.Data.Models
 
         public int MaxRange { get; set; }
 
+        public string CurrentValue { get; set; }
+
         public DateTime LastUpdated { get; set; }
 
         public string OwnerId { get; set; }

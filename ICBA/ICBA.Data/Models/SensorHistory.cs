@@ -16,8 +16,6 @@ namespace ICBA.Data.Models
 
         public DateTime When { get; set; }
 
-        public int Persistence { get; set; }
-
         public virtual Sensor Sensor { get; set; }
     }
 }

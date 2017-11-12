@@ -30,6 +30,9 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
         <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().CurrentValue)
+        </th>
+        <th class="text- left">
             @Html.DisplayNameFor(model => model.First().LastUpdated)
         </th>
         <th class="text- left">
@@ -67,6 +70,9 @@
                 </td>
                 <td class="text- left">
                     @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.CurrentValue)
                 </td>
                 <td class="text- left">
                     @Html.DisplayFor(modelItem => sensor.LastUpdated)
