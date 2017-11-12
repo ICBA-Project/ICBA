@@ -37,6 +37,14 @@ namespace ICBA.Web.Controllers
             return View(sensorsInDb);
         }
 
+        [Authorize]
+        public ActionResult OwnSensors()
+        {
+            string currentUserId = this.User.Identity.GetUserId();
+            IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList();
+            return View(sensorsInDb);
+        }
+
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
