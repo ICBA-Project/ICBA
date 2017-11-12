@@ -10,13 +10,6 @@ namespace ICBA.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISensorsService sensorsService;
-
-        public HomeController(ISensorsService sensorsService)
-        {
-            this.sensorsService = sensorsService;
-        }
-
         public ActionResult Index()
         {
             return View();

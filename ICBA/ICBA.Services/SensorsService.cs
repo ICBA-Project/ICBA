@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace ICBA.Services
 {
@@ -81,6 +82,10 @@ namespace ICBA.Services
             {
                 return string.Format("[Sensor: SensorId={0}, Tag={1}, Description={2}, MinPollingIntervalInSeconds={3}, MeasureType={4}]", SensorId, Tag, Description, MinPollingIntervalInSeconds, MeasureType);
             }
+        }
+
+        public void WinService()
+        {
         }
     }
 }

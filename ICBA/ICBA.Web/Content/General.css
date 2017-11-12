@@ -3,3 +3,14 @@
     left: 85%;
     top: 35%;
 }
+
+.logo {
+    position: absolute;
+    left: 0.4%;
+}
+
+.centered-checkbox {
+    position: fixed;
+    left: 53%;
+}
+

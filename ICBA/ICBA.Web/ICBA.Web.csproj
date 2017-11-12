@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SensorController.cs" />
     <Compile Include="Controllers\TemperController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,6 +216,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assests\img\blog_image-ninja.png" />
+    <Content Include="Assests\img\Primary_Alternate%402x.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
@@ -240,9 +243,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\github.png" />
-    <Content Include="img\icb.png" />
-    <Content Include="img\telerik-academy-logo.png" />
+    <Content Include="Assests\img\github.png" />
+    <Content Include="Assests\img\icb.png" />
+    <Content Include="Assests\img\telerik-academy-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -256,6 +259,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -326,6 +331,7 @@
     <Content Include="Views\Temp\OldLayout.cshtml" />
     <Content Include="Views\Temp\OldLogin.cshtml" />
     <Content Include="Views\Temper\SensorsTable.cshtml" />
+    <Content Include="Views\Sensor\WinService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

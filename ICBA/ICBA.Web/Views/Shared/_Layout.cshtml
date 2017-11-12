@@ -17,6 +17,8 @@
 </head>
 <body>
     <div id="header">
+        <img src="~/Assests/img/Primary_Alternate@2x.png" class="logo" width="13%" height="2%" />
+        @*<img src="~/Assets/img/blog_image-ninja.png" class="logo" width="8.5%" height="2%" />*@
     </div>
     <!--close-Header-part-->
     <!--top-Header-menu-->
@@ -81,7 +83,7 @@
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <li>@Html.ActionLink("Admin Panel", "About", "Home")</li>
+                <li><a href="@Url.Action("About", "Home")"><i class="icon icon-bolt"></i> <span>Admin Panel</span></a></li>
             }
             @if (Request.IsAuthenticated)
             {
@@ -89,7 +91,7 @@
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <li>@Html.ActionLink("Create User", "About", "Home")</li>
+                <li><a href="@Url.Action("Contact", "Home")"><i class="icon icon-plus-sign"></i> <span>Create User</span></a></li>
             }
             <li><a href="@Url.Action("Contact", "Home")"><i class="icon icon-pencil"></i> <span>Contact</span></a></li>
         </ul>
