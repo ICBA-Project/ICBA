@@ -7,7 +7,7 @@
         Sensors count: <span class="sensorsCount">@Model.Count()</span>
     </span>
 </div>
-<table class="table-fill" width="100%">
+<table class="table-fill" width="90%">
     <tr>
         <th class="text-left">
             #
@@ -61,6 +61,12 @@
                     @{
                         string index = (sensorIndex + 1).ToString();
                         string className = "sensorIndex" + sensorIndex;
+                        string classUrl = "url" + sensorIndex;
+                        string classMin = "min" + sensorIndex;
+                        string classMax = "max" + sensorIndex;
+                        string classValue = "value" + sensorIndex;
+                        string updateInterval = "updateInterval" + sensorIndex;
+                        string placeholder2 = "placeholder2" + sensorIndex;
                     }
                     @index
                 </td>
@@ -101,7 +107,7 @@
                     @Html.DisplayFor(modelItem => sensor.OwnerId)
                 </td>
             </tr>
-            <tr class="tableRowDiv @className">
+            <tr class="tableRowDiv @className" style="display: none;">
                 <td colspan="12">
                     <div>
                         <div class="container-fluid">
@@ -113,12 +119,15 @@
                                             <h5>Sensor value in real time</h5>
                                         </div>
                                         <div class="widget-content">
-                                            <div id="placeholder2"></div>
+                                            <div id="placeholder2" class=@placeholder2 style="width:1055px; height:400px;"></div>
                                             <p>
                                                 Time between updates:
-                                                <input id="updateInterval" type="text" value="" style="text-align: right; width:5em">
+                                                <input id="updateInterval" class=@updateInterval type="text" value="" style="text-align: right; width:5em">
                                                 milliseconds
-                                                <span style="float: right">Current value: <span class="value"></span> @sensor.MeasureType</span>
+                                                <span class=@classUrl style="display:none">@sensor.Url</span>
+                                                <span class=@classMin style="display:none">@sensor.MinRange</span>
+                                                <span class=@classMax style="display:none">@sensor.MaxRange</span>
+                                                <span style="float: right">Current value: <span class=@classValue></span> @sensor.MeasureType</span>
                                             </p>
                                         </div>
                                     </div>
@@ -136,118 +145,87 @@
 <script src="../../Scripts/js/jquery.min.js"></script>
 <script src="../../Scripts/js/jquery.flot.min.js"></script>
 <script type="text/javascript">
-    var binded = 0;
-    $(function () {
-        var length = 300;
-        var data = [], totalPoints = 300;
-        while(length--) data.push(0);
-
-        function getRandomData() {
-            if (data.length >= 300)
-                data = data.slice(1);
-
-            if (binded == 0) {
-                $(".table-fill").on("click", ".tableRow", function () {
-                    let selected = $(this).text().trim();
-                    console.log(selected)
-                    //$(".chooseSensor").toggle();
-                    //var idOfParent = $(this).parents('table').attr('id');
-                    //$("#" + idOfParent).toggle();
-                    //$(".widget-box").toggle();
-                    //var values = selected.split("\n");
-                    //values = values.map(string => {
-                    //    return string.trim()
-                    //})
-                    //values = arr = values.filter(function (n) { return n != '' });
-                    //$("#sensorId").html(values[0]);
-                    //$('#sensorName').attr("placeholder", values[1]);
-                    //$('#sensorDescription').attr("placeholder", values[2]);
-                    //$("#sensorUrl").html(values[3]);
-                    //$('#hiddenSensorUrl').attr("value", values[1]);
-                    //$("#sensorMeasureType").html(values[4]);
-                    //$('#sensorPollingInterval').attr("placeholder", parseInt(values[5]));
-                    //$('#sensorPollingInterval').attr("min", parseInt(values[5]));
-                    //$('#sensorMinValue').attr("placeholder", parseInt(values[6]));
-                    //$('#sensorMinValue').attr("min", parseInt(values[6]));
-                    //$('#sensorMinValue').attr("max", parseInt(values[7]));
-                    //$('#sensorMaxValue').attr("placeholder", parseInt(values[7]));
-                    //$('#sensorMaxValue').attr("min", parseInt(values[6]));
-                    //$('#sensorMaxValue').attr("max", parseInt(values[7]));
-                });
-                binded = 1;
-            }
-            
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              $.ajax({
-                url: 'http://telerikacademy.icb.bg/api/sensor/f1796a28-642e-401f-8129-fd7465417061',
-                method:'GET',
-                beforeSend: function(xhr){xhr.setRequestHeader('auth-token', '8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0');},
-                }).done (function (result) {
-                    data.push(result.value)
-                    $(".value").text(result.value)
-                }
-              )
-
-              var res = [];
-              for (var i = 0; i < data.length; ++i)
-              res.push([i, data[i]])
-              return res;
-        }
-
-        var updateInterval = 1000;
-        $("#updateInterval").val(updateInterval).change(function () {
-            var v = $(this).val();
-            if (v && !isNaN(+v)) {
-                updateInterval = +v;
-                if (updateInterval < 1)
-                    updateInterval = 1;
-                if (updateInterval > 2000)
-                    updateInterval = 2000;
-                $(this).val("" + updateInterval);
-            }
-        });
-
-        var options = {
-            series: { shadowSize: 0 },
-            yaxis: { min: 15, max: 28 },
-            xaxis: { show: false }
-        };
-        var plot = $.plot($("#placeholder2"), [ getRandomData() ], options);
-
-        function update() {
-            plot.setData([ getRandomData() ]);
-
-            plot.draw();
-
-            setTimeout(update, updateInterval);
-        }
-
-        update();
-    });
-
     $('.tableRow').click(function () {
         $(this).nextUntil('tr.tableRow').slideToggle(0);
     });
 
-    $(document).ready(function () {
-        $(".tableRowDiv").toggle();
+    $(function () {
+        for (let i = 0; i < $(".sensorsCount").html(); i++) {
+            let length = 300;
+            let data = [], totalPoints = 300;
+            while (length--) data.push(0);
+
+            let finalMinString = ".min" + i;
+            let minValue = parseInt($(finalMinString).html());
+            let finalMaxString = ".max" + i;
+            let maxValue = parseInt($(finalMaxString).html());
+
+            function getRandomData() {
+                if (data.length >= 300)
+                    data = data.slice(1);
+
+                let finalUrlString = ".url" + i;
+                let finalUrl = $(finalUrlString).html();
+                $.ajax({
+                    url: finalUrl,
+                    method: 'GET',
+                    beforeSend: function (xhr) { xhr.setRequestHeader('auth-token', '8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0'); },
+                }).done(function (result) {
+                    if (result.value == "true") {
+                        data.push("1");
+                    } else if (result.value == "false") {
+                        data.push("0");
+                    } else {
+                        if (result.value < minValue) {
+                            data.push(minValue);
+                        } else if (result.value > maxValue) {
+                                data.push(maxValue);
+                        } else {
+                            data.push(result.value);
+                        }
+                    }
+                    let finalValueString = ".value" + i;
+                    $(finalValueString).text(result.value)
+                })
+
+                let res = [];
+                for (let i = 0; i < data.length; ++i)
+                    res.push([i, data[i]])
+                return res;
+            }
+
+            let finalUpdateInterval = ".updateInterval" + i;
+            let updateInterval = 1000;
+            $(finalUpdateInterval).val(updateInterval).change(function () {
+                let v = $(this).val();
+                if (v && !isNaN(+v)) {
+                    updateInterval = +v;
+                    if (updateInterval < 1)
+                        updateInterval = 1;
+                    if (updateInterval > 2000)
+                        updateInterval = 2000;
+                    $(this).val("" + updateInterval);
+                }
+            });
+
+            let options = {
+                series: { shadowSize: 0 },
+                yaxis: { min: minValue, max: maxValue },
+                xaxis: { show: false }
+            };
+
+            let finalPlaceHolderString = ".placeholder2" + i;
+            let plot = $.plot($(finalPlaceHolderString), [getRandomData()], options);
+
+            function update() {
+                plot.setData([getRandomData()]);
+
+                plot.draw();
+
+                setTimeout(update, updateInterval);
+            }
+
+            update();
+        }
     });
 </script>
