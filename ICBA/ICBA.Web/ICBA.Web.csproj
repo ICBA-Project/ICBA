@@ -218,6 +218,7 @@
   <ItemGroup>
     <Content Include="Assests\img\blog_image-ninja.png" />
     <Content Include="Assests\img\Primary_Alternate%402x.png" />
+    <Content Include="Assests\img\ready.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />

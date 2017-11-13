@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Sensor>
 
+<link rel="stylesheet" href="../../Content/css/matrix-style.css" />
+
 @{
     ICollection<string> measureTypes = new List<string>();
     foreach (Sensor sensor in Model)
@@ -21,10 +23,10 @@
             @Html.DisplayNameFor(model => model.First().MeasureType)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (string measureType in measureTypes)
         {
-            <tr>
+            <tr class="tableRow">
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => measureType)
                 </td>
@@ -90,9 +92,9 @@
     <span class="icon"> <i class="icon-align-justify"></i> </span>
     Choose a sensor:
 </div>
-<table id="1" class="table-fill perc table2">
+<table id="1" class="table-fill perc table2" width="100%">
     <tr>
-        <th class="text-left">
+        <th class="text-left" style="display:none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
         <th class="text-left">
@@ -117,15 +119,15 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (Sensor sensor in Model)
         {
             if (sensor.MeasureType != "%")
             {
                 continue;
             }
-            <tr>
-                <td class="text-left">
+            <tr class="tableRow">
+                <td class="text-left" style="display:none;">
                     @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
                 <td class="text-left">
@@ -153,9 +155,9 @@
         }
     </tbody>
 </table>
-<table id="2" class="table-fill C table2">
+<table id="2" class="table-fill C table2" width="100%">
     <tr>
-        <th class="text-left">
+        <th class="text-left" style="display:none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
         <th class="text-left">
@@ -180,14 +182,14 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (Sensor sensor in Model)
         {
             if (sensor.MeasureType != "°C")
             {
                 continue;
             }
-            <tr>
+            <tr class="tableRow">
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
@@ -216,9 +218,9 @@
         }
     </tbody>
 </table>
-<table id="3" class="table-fill truefalse table2">
+<table id="3" class="table-fill truefalse table2" width="100%">
     <tr>
-        <th class="text-left">
+        <th class="text-left" style="display:none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
         <th class="text-left">
@@ -243,15 +245,15 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (Sensor sensor in Model)
         {
             if (sensor.MeasureType != "(true/false)")
             {
                 continue;
             }
-            <tr>
-                <td class="text-left">
+            <tr class="tableRow">
+                <td class="text-left" style="display:none;">
                     @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
                 <td class="text-left">
@@ -279,9 +281,9 @@
         }
     </tbody>
 </table>
-<table id="4" class="table-fill W table2">
+<table id="4" class="table-fill W table2" width="100%">
     <tr>
-        <th class="text-left">
+        <th class="text-left" style="display:none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
         <th class="text-left">
@@ -306,15 +308,15 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (Sensor sensor in Model)
         {
             if (sensor.MeasureType != "W")
             {
                 continue;
             }
-            <tr>
-                <td class="text-left">
+            <tr class="tableRow">
+                <td class="text-left" style="display:none;">
                     @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
                 <td class="text-left">
@@ -342,9 +344,9 @@
         }
     </tbody>
 </table>
-<table id="5" class="table-fill dB table2">
+<table id="5" class="table-fill dB table2" width="100%">
     <tr>
-        <th class="text-left">
+        <th class="text-left" style="display:none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
         <th class="text-left">
@@ -369,15 +371,15 @@
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
     </tr>
-    <tbody class="table-hover">
+    <tbody class="table hover">
         @foreach (Sensor sensor in Model)
         {
             if (sensor.MeasureType != "dB")
             {
                 continue;
             }
-            <tr>
-                <td class="text-left">
+            <tr class="tableRow">
+                <td class="text-left" style="display:none;">
                     @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
                 <td class="text-left">
@@ -413,7 +415,7 @@
     <div class="widget-content nopadding">
         <form method="post" action="CreateSensor" class="form-horizontal">
             @Html.AntiForgeryToken()
-            <div class="control-group">
+            <div class="control-group" style="display: none;">
                 <label class="control-label">Id :</label>
                 <div class="controls">
                     <div id="sensorId" class="span11"></div>
