@@ -59,7 +59,7 @@
             $("." + selected).toggle();
         });
 
-        $(".table2").on("click", "tr", function () {
+        $(".table2").on("click", ".tableRow", function () {
             let selected = $(this).text().trim();
             $(".chooseSensor").toggle();
             var idOfParent = $(this).parents('table').attr('id');

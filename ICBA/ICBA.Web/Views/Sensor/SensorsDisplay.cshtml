@@ -147,7 +147,7 @@
                 data = data.slice(1);
 
             if (binded == 0) {
-                $(".table-fill").on("click", "tr", function () {
+                $(".table-fill").on("click", ".tableRow", function () {
                     let selected = $(this).text().trim();
                     console.log(selected)
                     //$(".chooseSensor").toggle();
