@@ -16,7 +16,7 @@ namespace ICBA.Web.Controllers
             return View();
         }
 
-        //[OutputCache(Duration = 10, VaryByParam = "none")]
+        [OutputCache(Duration = 30)]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
