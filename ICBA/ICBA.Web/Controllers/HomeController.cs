@@ -10,13 +10,13 @@ namespace ICBA.Web.Controllers
 {
     public class HomeController : Controller
     {
-        [OutputCache(Duration = 120, VaryByParam = "none")]
+        //[OutputCache(Duration = 120, VaryByParam = "none")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [OutputCache(Duration = 10, VaryByParam = "none")]
+        //[OutputCache(Duration = 10, VaryByParam = "none")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
