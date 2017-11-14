@@ -1,5 +1,31 @@
 ﻿@model IEnumerable<Sensor>
 
+
+<style>
+     table {
+         border-spacing: 0;
+         width: 100%;
+         border: 1px solid #ddd;
+        
+    }
+
+     th {
+         cursor: pointer;
+        
+    }
+
+     th, td {
+         text-align: left;
+         padding: 16px;
+        
+    }
+
+     tr:nth-child(even) {
+         background-color: #f2f2f2
+    }
+  
+</style>
+ 
 <link rel="stylesheet" href="../../Content/css/matrix-style.css" />
 
 <div class="chooseSensor">
@@ -7,45 +33,46 @@
         Sensors count: <span class="sensorsCount">@Model.Count()</span>
     </span>
 </div>
-<table class="table-fill" width="90%">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for sensor name.." title="Type in a name">
+ <table id="myTable" class="table-fill" width="100%">
     <tr>
         <th class="text-left">
             #
         </th>
-        <th class="text-left" style="display: none;">
+        <th onclick="sortTable(0)" class="text-left" style="display: none;">
             @Html.DisplayNameFor(model => model.First().Id)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(1)" class="text-left">
             @Html.DisplayNameFor(model => model.First().SensorName)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(2)" class="text-left">
             @Html.DisplayNameFor(model => model.First().Description)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(3)" class="text-left">
             @Html.DisplayNameFor(model => model.First().Url)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(4)" class="text-left">
             @Html.DisplayNameFor(model => model.First().MeasureType)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(5)" class="text-left">
             @Html.DisplayNameFor(model => model.First().PollingInterval)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(6)" class="text-left">
             @Html.DisplayNameFor(model => model.First().AccessIsPublic)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(7)" class="text-left">
             @Html.DisplayNameFor(model => model.First().MinRange)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(8)" class="text-left">
             @Html.DisplayNameFor(model => model.First().MaxRange)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(9)" class="text-left">
             @Html.DisplayNameFor(model => model.First().CurrentValue)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(10)" class="text-left">
             @Html.DisplayNameFor(model => model.First().LastUpdated)
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(11)" class="text-left">
             @Html.DisplayNameFor(model => model.First().OwnerId)
         </th>
     </tr>
@@ -139,8 +166,8 @@
                     </div>
                 </td>
             </tr>
-            sensorIndex++;
-        }
+                            sensorIndex++;
+                        }
     </tbody>
 </table>
 
@@ -237,3 +264,87 @@
         }
     });
 </script>
+
+
+<script type="text/javascript">
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script>
+
+<script type="text/javascript">
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 2].getElementsByTagName("TD")[n];
+
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                        console.log(x.innerHTML);
+                        console.log(y.innerHTML);
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 2], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
+
