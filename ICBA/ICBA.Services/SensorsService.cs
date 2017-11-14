@@ -4,6 +4,7 @@ using ICBA.Data.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -170,7 +171,7 @@ namespace ICBA.Services
 
             if (currentValue != "true" && currentValue !="false")
             {
-                double currentValueDouble = double.Parse(currentValue);
+                double currentValueDouble = double.Parse(currentValue, new CultureInfo("en"));
         
                 if (currentValueDouble > (sensor.MaxRange * 1.01))
                 {

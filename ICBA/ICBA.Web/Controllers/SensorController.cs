@@ -27,7 +27,8 @@ namespace ICBA.Web.Controllers
 
         public ActionResult WinService()
         {
-            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
+            string name = "ICB.ScheduledJob";
+            SlackService.PostMessage("User " + name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             if (this.HttpContext.Request.Headers["auth-token"] == "0b3fb7f14591-cf7b-2834-d1e5-ef64c4e8")
             {
                 sensorsService.WinService();
