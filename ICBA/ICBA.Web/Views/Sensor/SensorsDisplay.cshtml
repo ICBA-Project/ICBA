@@ -61,6 +61,7 @@
                     @{
                         string index = (sensorIndex + 1).ToString();
                         string className = "sensorIndex" + sensorIndex;
+                        string classSensorName = "name" + sensorIndex;
                         string classUrl = "url" + sensorIndex;
                         string classMin = "min" + sensorIndex;
                         string classMax = "max" + sensorIndex;
@@ -124,6 +125,7 @@
                                                 Time between updates:
                                                 <input id="updateInterval" class=@updateInterval type="text" value="" style="text-align: right; width:5em">
                                                 milliseconds
+                                                <span class=@classSensorName style="display:none">@sensor.SensorName</span>
                                                 <span class=@classUrl style="display:none">@sensor.Url</span>
                                                 <span class=@classMin style="display:none">@sensor.MinRange</span>
                                                 <span class=@classMax style="display:none">@sensor.MaxRange</span>
@@ -182,10 +184,10 @@
                     } else {
                         if (result.value < minValue) {
                             data.push(minValue);
-                            responsiveVoice.speak("Sensor value too low.");
+                            responsiveVoice.speak($('.name' + i).html() + " below minimum.");
                         } else if (result.value > maxValue) {
                             data.push(maxValue);
-                            responsiveVoice.speak("Sensor value too high.");
+                            responsiveVoice.speak($('.name' + i).html() + " above maximum.");
                         } else {
                             data.push(result.value);
                         }
@@ -201,7 +203,7 @@
             }
 
             let finalUpdateInterval = ".updateInterval" + i;
-            let updateInterval = 2000;
+            let updateInterval = 3000;
             $(finalUpdateInterval).val(updateInterval).change(function () {
                 let v = $(this).val();
                 if (v && !isNaN(+v)) {
