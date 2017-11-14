@@ -7,16 +7,20 @@ using ICBA.Services;
 using ICBA.Data;
 using ICBA.Data.Models;
 using Microsoft.AspNet.Identity;
+using Bytes2you.Validation;
 
 namespace ICBA.Web.Controllers
 {
     public class SensorController : Controller
     {
-        private SensorsService sensorsService;
-        private ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
+        private readonly SensorsService sensorsService;
 
         public SensorController(SensorsService sensorsService, ApplicationDbContext dbContext)
         {
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+            Guard.WhenArgument(sensorsService, "sensorsService").IsNull().Throw();
+
             this.sensorsService = sensorsService;
             this.dbContext = dbContext;
         }
@@ -63,6 +67,8 @@ namespace ICBA.Web.Controllers
                 case "nois":
                     sensorsInDb = dbContext.Sensors.Where(e => e.AccessIsPublic == true && e.MeasureType == "dB").ToList();
                     break;
+                default:
+                    throw new ArgumentException();
             }
             return View("SensorsDisplay", (IEnumerable<Sensor>) sensorsInDb);
         }
@@ -110,19 +116,19 @@ namespace ICBA.Web.Controllers
 
                 if (sensor.PollingInterval < sensorFromDb.PollingInterval)
                 {
-                    throw new Exception();
+                    throw new ArgumentException();
                 }
                 if (sensor.MinRange < sensorFromDb.MinRange || sensor.MinRange > sensorFromDb.MaxRange)
                 {
-                    throw new Exception();
+                    throw new ArgumentException();
                 }
                 if (sensor.MaxRange < sensorFromDb.MinRange || sensor.MaxRange > sensorFromDb.MaxRange)
                 {
-                    throw new Exception();
+                    throw new ArgumentException();
                 }
                 if (sensor.MaxRange < sensor.MinRange)
                 {
-                    throw new Exception();
+                    throw new ArgumentException();
                 }
                 Sensor sensorToAdd = new Sensor
                 {
@@ -145,7 +151,7 @@ namespace ICBA.Web.Controllers
 
                 return this.View("AddedSensor");
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
                 return this.View("FailedToAddSensor");
             }

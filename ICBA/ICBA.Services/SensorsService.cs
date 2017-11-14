@@ -1,4 +1,5 @@
-﻿using ICBA.Data;
+﻿using Bytes2you.Validation;
+using ICBA.Data;
 using ICBA.Data.Models;
 using Newtonsoft.Json;
 using System;
@@ -12,10 +13,12 @@ namespace ICBA.Services
 {
     public class SensorsService : ISensorsService
     {
-        private ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
 
         public SensorsService(ApplicationDbContext dbContext)
         {
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+
             this.dbContext = dbContext;
         }
 
