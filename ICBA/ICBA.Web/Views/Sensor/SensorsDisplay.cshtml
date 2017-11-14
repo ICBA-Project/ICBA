@@ -172,6 +172,9 @@
                     method: 'GET',
                     beforeSend: function (xhr) { xhr.setRequestHeader('auth-token', '8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0'); },
                 }).done(function (result) {
+                    if (result.value == undefined) {
+                        $('.placeholder2' + i).css("background-image", "url(../Assests/img/icb.png)");
+                    }
                     if (result.value == "true") {
                         data.push("1");
                     } else if (result.value == "false") {
@@ -205,8 +208,8 @@
                     updateInterval = +v;
                     if (updateInterval < 1)
                         updateInterval = 1;
-                    if (updateInterval > 2000)
-                        updateInterval = 2000;
+                    if (updateInterval > 10000)
+                        updateInterval = 10000;
                     $(this).val("" + updateInterval);
                 }
             });
