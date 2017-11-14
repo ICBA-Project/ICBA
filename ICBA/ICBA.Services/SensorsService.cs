@@ -165,23 +165,23 @@ namespace ICBA.Services
             SensorData sensorData = JsonConvert.DeserializeObject<SensorData>(objReader.ReadToEnd());
 
             string currentValue = sensorData.Value;
+            dbContext.Sensors.Find(sensor.Id).CurrentValue = currentValue;
+            dbContext.Sensors.Find(sensor.Id).LastUpdated = sensorData.TimeStamp;
+
             if (currentValue != "true" && currentValue !="false")
             {
                 double currentValueDouble = double.Parse(currentValue);
-
-                if (currentValueDouble > sensor.MaxRange)
+        
+                if (currentValueDouble > (sensor.MaxRange * 1.01))
                 {
-                    SlackService.PostMessage(SlackService.valueAboveMax);
+                    SlackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is above the set maximum of " + sensor.MaxRange + ".");
                 }
                 else
-                if (currentValueDouble < sensor.MinRange)
+                if (currentValueDouble < (sensor.MinRange * 0.99))
                 {
-                    SlackService.PostMessage(SlackService.valueBelowMin);
+                    SlackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is below the set minimum of " + sensor.MinRange + ".");
                 }
             }
-
-            dbContext.Sensors.Find(sensor.Id).CurrentValue = currentValue;
-            dbContext.Sensors.Find(sensor.Id).LastUpdated = sensorData.TimeStamp;
 
             SensorHistory historyEntry = new SensorHistory
             {

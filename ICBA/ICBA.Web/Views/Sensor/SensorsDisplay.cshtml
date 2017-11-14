@@ -211,10 +211,10 @@
                     } else {
                         if (result.value < minValue) {
                             data.push(minValue);
-                            responsiveVoice.speak($('.name' + i).html() + " below minimum.");
+                            responsiveVoice.speak($('.name' + i).html() + " is below minimum.");
                         } else if (result.value > maxValue) {
                             data.push(maxValue);
-                            responsiveVoice.speak($('.name' + i).html() + " above maximum.");
+                            responsiveVoice.speak($('.name' + i).html() + " is above maximum.");
                         } else {
                             data.push(result.value);
                         }

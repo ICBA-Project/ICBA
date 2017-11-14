@@ -13,8 +13,6 @@ namespace ICBA.Services
         private static readonly Uri _uri = new Uri(@"https://hooks.slack.com/services/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");
         private const string SlackUsername = "ICBA-Sensors-Information";
         private static readonly string welcomingMessage = $"I will be reporting anything out of the ordinary happening with your sensors!";
-        public static string valueBelowMin = "Current value of the sensor is below the set Minimum";
-        public static string valueAboveMax = "Current value of the sensor is above the set Maximum";
         private const string SlackChannel = "#sensorsfeedback";
         private const string WebExceptionString = "Bad WebClient";
 
