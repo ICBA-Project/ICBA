@@ -51,6 +51,7 @@
     <Compile Include="ISensorsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorsService.cs" />
+    <Compile Include="SlackService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ICBA.Data\ICBA.Data.csproj">
