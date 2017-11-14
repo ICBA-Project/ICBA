@@ -27,6 +27,7 @@ namespace ICBA.Web.Controllers
 
         public ActionResult WinService()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             if (this.HttpContext.Request.Headers["auth-token"] == "0b3fb7f14591-cf7b-2834-d1e5-ef64c4e8")
             {
                 sensorsService.WinService();
@@ -37,12 +38,14 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult CreateSensor()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == null).ToList();
             return View(sensorsInDb);
         }
         
         public ActionResult PublicSensors(string id)
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb = new List<Sensor>();
             switch (id)
             {
@@ -76,6 +79,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult OwnSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList();
             return View("SensorsDisplay", sensorsInDb);
@@ -84,6 +88,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult SharedSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
             return View("SensorsDisplay", sensorsInDb);
@@ -92,6 +97,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult PrivateSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             ICollection<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
             foreach (Sensor sensor in dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList())
