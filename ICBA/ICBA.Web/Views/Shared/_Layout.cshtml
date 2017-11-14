@@ -6,19 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="~/Content/css/fullcalendar.css" />
     <link rel="stylesheet" href="~/Content/css/matrix-style.css" />
     <link rel="stylesheet" href="~/Content/css/matrix-media.css" />
     <link rel="stylesheet" href="~/Content/General.css" />
     <link href="~/fonts/fonts-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/css/jquery.gritter.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    @*@Styles.Render("~/bundles/layoutcss")*@
     @RenderSection("Styles", false)
 </head>
 <body>
     <div id="header">
         <img src="~/Assests/img/Primary_Alternate@2x.png" class="logo" width="8%" height="2%" />
-        @*<img src="~/Assets/img/blog_image-ninja.png" class="logo" width="8.5%" height="2%" />*@
     </div>
     <!--close-Header-part-->
     <!--top-Header-menu-->
@@ -26,24 +25,19 @@
         <ul class="nav">
             @if (Request.IsAuthenticated)
             {
-                @*<li class=""><a title="" href="@Url.Action("LogOff", "Account")"><i class="icon icon-signout"></i> <span class="text">Logout</span></a></li>*@
-            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-            {
-                @Html.AntiForgeryToken()
-
-                @*<li>
-                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                    </li>*@
-                <li class=""><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon icon-signout"></i> <span class="text">Logout</span></a></li>
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" , area = "" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class=""><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon icon-signout"></i> <span class="text">Logout</span></a></li>
                 }
             }
             @if (!Request.IsAuthenticated)
             {
-                <li class=""><a title="" href="@Url.Action("Login", "Account")"><i class="icon-key"></i> <span class="text">Login</span></a></li>
+                <li class=""><a title="" href="@Url.Action("Login", "Account", new { area = "" })"><i class="icon-key"></i> <span class="text">Login</span></a></li>
             }
             @if (!Request.IsAuthenticated)
             {
-                <li class=""><a title="" href="@Url.Action("Register", "Account")"><i class="icon-thumbs-up"></i> <span class="text">Register</span></a></li>
+                <li class=""><a title="" href="@Url.Action("Register", "Account", new { area = "" })"><i class="icon-thumbs-up"></i> <span class="text">Register</span></a></li>
             }
         </ul>
     </div>
@@ -53,7 +47,7 @@
     <div id="sidebar">
         <ul>
             <li>
-                <a href="@Url.Action("Index", "Home")"><i class="icon icon-home"></i> <span>Home</span></a>
+                <a href="@Url.Action("Index", "Home", new { area = "" })"><i class="icon icon-home"></i> <span>Home</span></a>
             </li>
             <li class="submenu">
                 <a href="#">
@@ -61,13 +55,13 @@
                     <span>Public Sensors</span> <span class="pull-right icon icon-chevron-down icon-chevron-down-moved-left"></span>
                 </a>
                 <ul>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "alli" })">All Public Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "temp" })">Temperature Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "humi" })">Humidity Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "elec" })">Electric Power Consumtion Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "occu" })">Occupancy Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "door" })">Door Sensors</a></li>
-                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { id = "nois" })">Noise Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "alli" })">All Public Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "temp" })">Temperature Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "humi" })">Humidity Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "elec" })">Electric Power Consumtion Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "occu" })">Occupancy Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "door" })">Door Sensors</a></li>
+                    <li><a href="@Url.Action("PublicSensors", "Sensor", new { area = "", id = "nois" })">Noise Sensors</a></li>
                 </ul>
             </li>
             @if (Request.IsAuthenticated)
@@ -75,25 +69,21 @@
                 <li class="submenu">
                     <a href="#"><i class="icon icon-th-list"></i> <span>Private Sensors</span> <span class="pull-right icon icon-chevron-down icon-chevron-down-moved-left"></span></a>
                     <ul>
-                        <li><a href="@Url.Action("PrivateSensors", "Sensor")">All Private Sensors</a></li>
-                        <li><a href="@Url.Action("OwnSensors", "Sensor")">Own Sensors</a></li>
-                        <li><a href="@Url.Action("SharedSensors", "Sensor")">Shared Sensors</a></li>
+                        <li><a href="@Url.Action("PrivateSensors", "Sensor", new { area = "" })">All Private Sensors</a></li>
+                        <li><a href="@Url.Action("OwnSensors", "Sensor", new { area = "" })">Own Sensors</a></li>
+                        <li><a href="@Url.Action("SharedSensors", "Sensor", new { area = "" })">Shared Sensors</a></li>
                     </ul>
                 </li>
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <li><a href="@Url.Action("About", "Home")"><i class="icon icon-bolt"></i> <span>Admin Panel</span></a></li>
+                <li><a href="@Url.Action("AdminPanel", "admin", new { area = "admin" })"><i class="icon icon-bolt"></i> <span>Admin Panel</span></a></li>
             }
             @if (Request.IsAuthenticated)
             {
-                <li><a href="@Url.Action("CreateSensor", "Sensor")"><i class="icon icon-plus"></i> <span>Create Sensor</span></a></li>
+                <li><a href="@Url.Action("CreateSensor", "Sensor", new { area = "" })"><i class="icon icon-plus"></i> <span>Create Sensor</span></a></li>
             }
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <li><a href="@Url.Action("Contact", "Home")"><i class="icon icon-plus-sign"></i> <span>Create User</span></a></li>
-            }
-            <li><a href="@Url.Action("Contact", "Home")"><i class="icon icon-pencil"></i> <span>Contact</span></a></li>
+            <li><a href="@Url.Action("Contact", "Home", new { area = "" })"><i class="icon icon-pencil"></i> <span>Contact</span></a></li>
         </ul>
     </div>
     <!--sidebar-menu-->
@@ -124,29 +114,10 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 
-    <script src="~/Scripts/js/excanvas.min.js"></script>
-    <script src="~/Scripts/js/jquery.min.js"></script>
-    <script src="~/Scripts/js/jquery.ui.custom.js"></script>
-    <script src="~/Scripts/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/js/jquery.flot.min.js"></script>
-    <script src="~/Scripts/js/jquery.flot.resize.min.js"></script>
-    <script src="~/Scripts/js/jquery.peity.min.js"></script>
-    <script src="~/Scripts/js/fullcalendar.min.js"></script>
-    <script src="~/Scripts/js/matrix.js"></script>
-    <script src="~/Scripts/js/matrix.dashboard.js"></script>
-    <script src="~/Scripts/js/jquery.gritter.min.js"></script>
-    <script src="~/Scripts/js/matrix.interface.js"></script>
-    <script src="~/Scripts/js/matrix.chat.js"></script>
-    <script src="~/Scripts/js/jquery.validate.js"></script>
-    <script src="~/Scripts/js/matrix.form_validation.js"></script>
-    <script src="~/Scripts/js/jquery.wizard.js"></script>
-    <script src="~/Scripts/js/jquery.uniform.js"></script>
-    <script src="~/Scripts/js/select2.min.js"></script>
-    <script src="~/Scripts/js/matrix.popover.js"></script>
-    <script src="~/Scripts/js/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/js/matrix.tables.js"></script>
+    @Scripts.Render("~/bundles/layoutjs")
 
     <script type="text/javascript">
         // This function is called from the pop-up menus to transfer to

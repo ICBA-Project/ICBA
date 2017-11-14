@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ICBA.Data.Models.ApplicationUser>
+
+<table class="table fill">
+    <tr>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserName)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().PasswordHash)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().Roles)
+        </th>
+    </tr>
+
+    <tbody class="table hover">
+        @foreach (ICBA.Data.Models.ApplicationUser user in Model)
+        {
+            <tr>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => user.Id)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => user.UserName)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => user.PasswordHash)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => user.Roles)
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+<table class="table fill">
+    <tr>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().Id)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().Description)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().MeasureType)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().MinRange)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().MaxRange)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().PollingInterval)
+        </th>
+        <th class="text- left">
+            @Html.DisplayNameFor(model => model.First().UserSensors.First().SharedWithUsers)
+        </th>
+    </tr>
+
+    <tbody class="table hover">
+        @foreach (ICBA.Data.Models.ApplicationUser user in Model)
+        {
+            foreach (ICBA.Data.Models.Sensor sensor in user.UserSensors)
+            {
+            <tr>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.Id)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.Description)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.MeasureType)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.MinRange)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.MaxRange)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.PollingInterval)
+                </td>
+                <td class="text- left">
+                    @Html.DisplayFor(modelItem => sensor.SharedWithUsers)
+                </td>
+            </tr>
+            }
+        }
+
+    </tbody>
+</table>
+

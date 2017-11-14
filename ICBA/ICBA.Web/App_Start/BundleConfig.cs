@@ -28,6 +28,37 @@ namespace ICBA.Web
                       "~/Content/site.css",
                       "~/Content/sidebar.css",
                       "~/Content/table.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/layoutcss").Include(
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/bootstrap-responsive.min.css",
+                      "~/Content/css/matrix-style.css",
+                      "~/Content/css/matrix-media.css",
+                      "~/fonts/fonts-awesome/css/font-awesome.css",
+                      "~/Content/css/jquery.gritter.css",
+                      "~/Content/googleapis.css",
+                      "~/Content/General.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/layoutjs").Include(
+                      "~/Scripts/js/excanvas.min.js",
+                      "~/Scripts/js/jquery.min.js",
+                      "~/Scripts/js/jquery.ui.custom.js",
+                      "~/Scripts/js/bootstrap.min.js",
+                      "~/Scripts/js/jquery.flot.min.js",
+                      "~/Scripts/js/jquery.flot.resize.min.js",
+                      "~/Scripts/js/jquery.peity.min.js",
+                      "~/Scripts/js/matrix.js",
+                      "~/Scripts/js/matrix.dashboard.js",
+                      "~/Scripts/js/jquery.gritter.min.js",
+                      "~/Scripts/js/matrix.interface.js",
+                      "~/Scripts/js/jquery.validate.js",
+                      "~/Scripts/js/matrix.form_validation.js",
+                      "~/Scripts/js/jquery.wizard.js",
+                      "~/Scripts/js/jquery.uniform.js",
+                      "~/Scripts/js/select2.min.js",
+                      "~/Scripts/js/matrix.popover.js",
+                      "~/Scripts/js/jquery.dataTables.min.js",
+                      "~/Scripts/js/matrix.tables.js"));
         }
     }
 }
