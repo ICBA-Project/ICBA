@@ -27,22 +27,26 @@ namespace ICBA.Web.Controllers
 
         public ActionResult WinService()
         {
+            string name = "ICB.ScheduledJob";
+            SlackService.PostMessage("User " + name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             if (this.HttpContext.Request.Headers["auth-token"] == "0b3fb7f14591-cf7b-2834-d1e5-ef64c4e8")
             {
                 sensorsService.WinService();
             }
-            return View();
+            return View("WhoDoYouThinkYouAre");
         }
 
         [Authorize]
         public ActionResult CreateSensor()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == null).ToList();
             return View(sensorsInDb);
         }
-        
+
         public ActionResult PublicSensors(string id)
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb = new List<Sensor>();
             switch (id)
             {
@@ -70,12 +74,13 @@ namespace ICBA.Web.Controllers
                 default:
                     throw new ArgumentException();
             }
-            return View("SensorsDisplay", (IEnumerable<Sensor>) sensorsInDb);
+            return View("SensorsDisplay", (IEnumerable<Sensor>)sensorsInDb);
         }
 
         [Authorize]
         public ActionResult OwnSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList();
             return View("SensorsDisplay", sensorsInDb);
@@ -84,6 +89,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult SharedSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             IEnumerable<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
             return View("SensorsDisplay", sensorsInDb);
@@ -92,6 +98,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult PrivateSensors()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             string currentUserId = this.User.Identity.GetUserId();
             ICollection<Sensor> sensorsInDb = dbContext.Users.First(e => e.Id == currentUserId).SharedWithUserSensors;
             foreach (Sensor sensor in dbContext.Sensors.Where(e => e.OwnerId == currentUserId).ToList())
@@ -113,6 +120,16 @@ namespace ICBA.Web.Controllers
             {
                 string sensorName = sensor.Url;
                 Sensor sensorFromDb = dbContext.Sensors.Where(m => m.SensorName == sensorName).First();
+
+                ICollection<ApplicationUser> sharedWithUsers = new List<ApplicationUser>();
+                if (sensor.OwnerId != null)
+                {
+                    string[] sharedWithUsersString = sensor.OwnerId.Split(null);
+                    foreach (string user in sharedWithUsersString)
+                    {
+                        sharedWithUsers.Add(dbContext.Users.Where(m => m.UserName == user).SingleOrDefault());
+                    }
+                }
 
                 if (sensor.PollingInterval < sensorFromDb.PollingInterval)
                 {
@@ -143,7 +160,8 @@ namespace ICBA.Web.Controllers
                     MaxRange = sensor.MaxRange,
                     CurrentValue = sensorFromDb.CurrentValue,
                     LastUpdated = DateTime.Now.AddSeconds(-300),
-                    OwnerId = this.User.Identity.GetUserId()
+                    OwnerId = this.User.Identity.GetUserId(),
+                    SharedWithUsers = sharedWithUsers
                 };
 
                 dbContext.Sensors.Add(sensorToAdd);
@@ -156,6 +174,37 @@ namespace ICBA.Web.Controllers
                 return this.View("FailedToAddSensor");
             }
         }
+
+        //[HttpPost]
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditSensor(Sensor sensor)
+        //{
+        //    sensor.s
+        //    if (this.User.Identity.Name != sensor.OwnerId)
+        //    {
+        //        return this.View("WhoDoYouThinkYouAre");
+        //    }
+        //    Sensor newSensorToAdd = new Sensor
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        SensorName = sensor.SensorName,
+        //        Description = sensor.Description,
+        //        Url = sensorFromDb.Url,
+        //        MeasureType = sensorFromDb.MeasureType,
+        //        PollingInterval = sensor.PollingInterval,
+        //        AccessIsPublic = sensor.MeasureType == "on" ? true : false,
+        //        MinRange = sensor.MinRange,
+        //        MaxRange = sensor.MaxRange,
+        //        CurrentValue = sensorFromDb.CurrentValue,
+        //        LastUpdated = DateTime.Now.AddSeconds(-300),
+        //        OwnerId = this.User.Identity.GetUserId(),
+        //    };
+        //    dbContext.Sensors.Add(sensorToAdd);
+        //    dbContext.SaveChanges();
+
+        //    return this.View("AddedSensor");
+        //}
 
         private double GetRandomDouble(int minimum, int maximum)
         {

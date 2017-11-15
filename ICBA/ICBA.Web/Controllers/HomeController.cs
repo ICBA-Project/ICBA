@@ -13,6 +13,7 @@ namespace ICBA.Web.Controllers
         //[OutputCache(Duration = 120, VaryByParam = "none")]
         public ActionResult Index()
         {
+            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             return View();
         }
 
