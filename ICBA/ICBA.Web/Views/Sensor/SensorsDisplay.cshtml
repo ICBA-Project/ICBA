@@ -4,7 +4,7 @@
 <style>
      table {
          border-spacing: 0;
-         width: 50%;
+         width: 100%;
          border: 1px solid #ddd;
         
     }
@@ -28,15 +28,13 @@
 
 <link rel="stylesheet" href="../../Content/css/matrix-style.css" />
 
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <div class="chooseSensor">
     <span class="icon"> <i class="icon-align-justify"></i>
         Sensors count: <span class="sensorsCount">@Model.Count()</span>
     </span>
 </div>
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for sensor name.." title="Type in a name">
- <table id="myTable" class="table-fill">
+ <table id="myTable" class="table-fill" width="100%">
     <tr>
         <th class="text-left">
             #
