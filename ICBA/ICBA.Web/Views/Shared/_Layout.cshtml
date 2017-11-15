@@ -77,7 +77,7 @@
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <li><a href="@Url.Action("AdminPanel", "admin", new { area = "admin" })"><i class="icon icon-bolt"></i> <span>Admin Panel</span></a></li>
+                <li><a href="@Url.Action("AdminPanel", "Admin", new { area = "Admin" })"><i class="icon icon-bolt"></i> <span>Admin Panel</span></a></li>
             }
             @if (Request.IsAuthenticated)
             {
@@ -89,7 +89,7 @@
             }
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
-                <li><a href="@Url.Action("EditUser", "admin", new { area = "admin" })"><i class="icon icon-user-md"></i> <span>Edit User</span></a></li>
+                <li><a href="@Url.Action("EditUser", "Admin", new { area = "Admin" })"><i class="icon icon-user-md"></i> <span>Edit User</span></a></li>
             }
             <li><a href="@Url.Action("Contact", "Home", new { area = "" })"><i class="icon icon-pencil"></i> <span>Contact</span></a></li>
         </ul>

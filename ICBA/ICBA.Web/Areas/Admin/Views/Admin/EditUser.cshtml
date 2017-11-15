@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ApplicationUser>
+
+<link rel="stylesheet" href="../../Content/css/matrix-style.css" />
+
+@section Scripts {
+    <script>
+        $(".table1").on("click", ".tableRow", function () {
+            let selected = $(this).text().trim();
+            var idOfParent = $(this).parents('table').attr('id');
+            $("#" + idOfParent).toggle();
+            $(".widget-box").toggle();
+            var values = selected.split("\n");
+            values = values.map(string => {
+                return string.trim()
+            })
+            values = arr = values.filter(function (n) { return n != '' });
+            $("#userName").html(values[0]);
+        });
+    </script>
+}
+
+<table id="1" class="table-fill perc table1" width="100%">
+    <tr>
+        <th class="text-left">
+            @Html.DisplayNameFor(model => model.First().UserName)
+        </th>
+    </tr>
+    <tbody class="table hover">
+        @foreach (ApplicationUser user in Model)
+        {
+            <tr class="tableRow">
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => user.UserName)
+                </td>
+                <td class="text-left">
+                    @Html.DisplayFor(modelItem => user.Roles.FirstOrDefault().)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="widget-box" hidden="true">
+    <div class="widget-title">
+        <span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>Edit User</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <form method="post" action="CreateSensor" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            <div class="control-group">
+                <label class="control-label">User Name :</label>
+                <div class="controls">
+                    <div id="userName" name="UserName" class="span11"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Public Access :</label>
+                <div class="controls">
+                    <input type="checkbox" name="Email" class="span11" checked />
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
