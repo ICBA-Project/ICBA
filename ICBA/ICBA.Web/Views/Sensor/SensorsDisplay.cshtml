@@ -25,7 +25,7 @@
     }
   
 </style>
- 
+
 <link rel="stylesheet" href="../../Content/css/matrix-style.css" />
 
 <div class="chooseSensor">
@@ -200,7 +200,7 @@
                     url: finalUrl,
                     method: 'GET',
                     beforeSend: function (xhr) { xhr.setRequestHeader('auth-token', '8e4c46fe-5e1d-4382-b7fc-19541f7bf3b0'); },
-                }).done(function (result) {
+                }).always(function (result) {
                     if (result.value == undefined) {
                         $('.placeholder2' + i).css("background-image", "url(../Assests/img/icb.png)");
                     }
@@ -276,7 +276,7 @@
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[2];
             if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                if (td.textContent.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
@@ -312,16 +312,13 @@
                 /*check if the two rows should switch place,
                 based on the direction, asc or desc:*/
                 if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-
-                        console.log(x.innerHTML);
-                        console.log(y.innerHTML);
+                    if (x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
                         //if so, mark as a switch and break the loop:
                         shouldSwitch = true;
                         break;
                     }
                 } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    if (x.textContent.toLowerCase() < y.textContent.toLowerCase()) {
                         //if so, mark as a switch and break the loop:
                         shouldSwitch = true;
                         break;
