@@ -198,36 +198,32 @@ namespace ICBA.Web.Controllers
             return View(sensorsInDb);
         }
 
-        //[HttpPost]
-        //[Authorize]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditSensor(Sensor sensor)
-        //{
-        //    sensor.s
-        //    if (this.User.Identity.Name != sensor.OwnerId)
-        //    {
-        //        return this.View("WhoDoYouThinkYouAre");
-        //    }
-        //    Sensor newSensorToAdd = new Sensor
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        SensorName = sensor.SensorName,
-        //        Description = sensor.Description,
-        //        Url = sensorFromDb.Url,
-        //        MeasureType = sensorFromDb.MeasureType,
-        //        PollingInterval = sensor.PollingInterval,
-        //        AccessIsPublic = sensor.MeasureType == "on" ? true : false,
-        //        MinRange = sensor.MinRange,
-        //        MaxRange = sensor.MaxRange,
-        //        CurrentValue = sensorFromDb.CurrentValue,
-        //        LastUpdated = DateTime.Now.AddSeconds(-300),
-        //        OwnerId = this.User.Identity.GetUserId(),
-        //    };
-        //    dbContext.Sensors.Add(sensorToAdd);
-        //    dbContext.SaveChanges();
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSensor(Sensor sensor)
+        {
+            if (this.User.Identity.Name != sensor.OwnerId && !this.User.IsInRole("Admin"))
+            {
+                return this.View("WhoDoYouThinkYouAre");
+            }
 
-        //    return this.View("AddedSensor");
-        //}
+            var dbSensor = this.dbContext.Sensors.First(s => s.SensorName == sensor.Url);
+            if (dbSensor != null)
+            {
+                dbSensor.SensorHistory = sensor.SensorHistory;
+                dbSensor.Description = sensor.Description;
+                dbSensor.PollingInterval = sensor.PollingInterval;
+                dbSensor.AccessIsPublic = sensor.MeasureType == "on" ? true : false;
+                dbSensor.MinRange = sensor.MinRange;
+                dbSensor.MaxRange = sensor.MaxRange;
+                dbSensor.SharedWithUsers = sensor.SharedWithUsers;
+
+                this.dbContext.SaveChanges();
+            }
+
+            return this.View("EditedSensor");
+        }
 
         private double GetRandomDouble(int minimum, int maximum)
         {

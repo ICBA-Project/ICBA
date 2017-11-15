@@ -37,7 +37,7 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $(".chooseSensor").toggle();
             $(".table2").toggle();
             $(".widget-box").toggle();
@@ -69,7 +69,7 @@
             values = values.map(string => {
                 return string.trim()
             })
-            values = arr = values.filter(function(n){ return n != '' });
+            values = arr = values.filter(function (n) { return n != '' });
             $("#sensorId").html(values[0]);
             $('#sensorName').attr("placeholder", values[1]);
             $('#sensorDescription').attr("placeholder", values[2]);
