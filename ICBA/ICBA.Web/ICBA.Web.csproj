@@ -328,7 +328,7 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Sensor\WinService.cshtml" />
+    <Content Include="Views\Sensor\WhoDoYouThinkYouAre.cshtml" />
     <Content Include="Views\Sensor\CreateSensor.cshtml" />
     <Content Include="Views\Sensor\AddedSensor.cshtml" />
     <Content Include="Views\Sensor\FailedToAddSensor.cshtml" />
