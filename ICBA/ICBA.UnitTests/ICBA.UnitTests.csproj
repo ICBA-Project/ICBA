@@ -94,8 +94,12 @@
   <ItemGroup>
     <Compile Include="Controllers\SensorControllerTests\Constructor_Should.cs" />
     <Compile Include="Controllers\SensorControllerTests\CreateSensor_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\OwnSensors.cs" />
+    <Compile Include="Controllers\SensorControllerTests\EditSensorHTTPPost_Should.cs" />
+    <Compile Include="Controllers\SensorControllerTests\EditSensor_Should.cs" />
+    <Compile Include="Controllers\SensorControllerTests\OwnSensors_Should.cs" />
+    <Compile Include="Controllers\SensorControllerTests\PrivateSensors_Should.cs" />
     <Compile Include="Controllers\SensorControllerTests\PublicSensors_Should.cs" />
+    <Compile Include="Controllers\SensorControllerTests\SharedSensor_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
