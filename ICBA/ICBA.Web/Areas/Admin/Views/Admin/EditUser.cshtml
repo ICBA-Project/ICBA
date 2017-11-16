@@ -6,15 +6,13 @@
     <script>
         $(".table1").on("click", ".tableRow", function () {
             let selected = $(this).text().trim();
-            var idOfParent = $(this).parents('table').attr('id');
-            $("#" + idOfParent).toggle();
             $(".widget-box").toggle();
             var values = selected.split("\n");
             values = values.map(string => {
                 return string.trim()
             })
             values = arr = values.filter(function (n) { return n != '' });
-            $("#userName").html(values[0]);
+            $('#userName').attr("value", values[0]);
         });
     </script>
 }
@@ -32,9 +30,6 @@
                 <td class="text-left">
                     @Html.DisplayFor(modelItem => user.UserName)
                 </td>
-                <td class="text-left">
-                    @Html.DisplayFor(modelItem => user.Roles.FirstOrDefault().)
-                </td>
             </tr>
         }
     </tbody>
@@ -45,16 +40,16 @@
         <h5>Edit User</h5>
     </div>
     <div class="widget-content nopadding">
-        <form method="post" action="CreateSensor" class="form-horizontal">
+        <form method="post" action="EditUser" class="form-horizontal">
             @Html.AntiForgeryToken()
             <div class="control-group">
                 <label class="control-label">User Name :</label>
                 <div class="controls">
-                    <div id="userName" name="UserName" class="span11"></div>
+                    <input type="text" id="userName" name="UserName" class="span11" readonly required></input>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Public Access :</label>
+                <label class="control-label">Make Admin :</label>
                 <div class="controls">
                     <input type="checkbox" name="Email" class="span11" checked />
                 </div>
