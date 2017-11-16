@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISensorsService.cs" />
+    <Compile Include="ISlackService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorsService.cs" />
     <Compile Include="SlackService.cs" />

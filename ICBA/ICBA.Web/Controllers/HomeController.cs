@@ -1,4 +1,5 @@
-﻿using ICBA.Data.Models;
+﻿using Bytes2you.Validation;
+using ICBA.Data.Models;
 using ICBA.Services;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,19 @@ namespace ICBA.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private SlackService slackService;
+
+        public HomeController(SlackService slackService)
+        {
+            Guard.WhenArgument(slackService, "slackService").IsNull().Throw();
+
+            this.slackService = slackService;
+        }
+
         //[OutputCache(Duration = 120, VaryByParam = "none")]
         public ActionResult Index()
         {
-            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
+            slackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             return View();
         }
 

@@ -15,12 +15,15 @@ namespace ICBA.Services
     public class SensorsService : ISensorsService
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly SlackService slackService;
 
-        public SensorsService(ApplicationDbContext dbContext)
+        public SensorsService(ApplicationDbContext dbContext, SlackService slackService)
         {
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+            Guard.WhenArgument(slackService, "slackService").IsNull().Throw();
 
             this.dbContext = dbContext;
+            this.slackService = slackService;
         }
 
         private void AddSensorToDatabase(Sensor sensor)
@@ -113,7 +116,7 @@ namespace ICBA.Services
             }
         }
 
-        public class SensorData
+        private class SensorData
         {
             public DateTime TimeStamp
             {
@@ -175,12 +178,12 @@ namespace ICBA.Services
         
                 if (currentValueDouble > (sensor.MaxRange * 1.01))
                 {
-                    SlackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is above the set maximum of " + sensor.MaxRange + ".");
+                    slackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is above the set maximum of " + sensor.MaxRange + ".");
                 }
                 else
                 if (currentValueDouble < (sensor.MinRange * 0.99))
                 {
-                    SlackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is below the set minimum of " + sensor.MinRange + ".");
+                    slackService.PostMessage("Current value of " + sensor.SensorName + " is " + sensor.CurrentValue + ", which is below the set minimum of " + sensor.MinRange + ".");
                 }
             }
 

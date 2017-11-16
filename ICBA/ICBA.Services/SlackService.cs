@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 namespace ICBA.Services
 {
-    public static class SlackService
+    public class SlackService : ISlackService
     {
-        private static readonly Uri _uri = new Uri(@"https://hooks.slack.com/services/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");
+        private readonly Uri _uri = new Uri(@"https://hooks.slack.com/services/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");
+        private readonly string welcomingMessage = $"I will be reporting anything out of the ordinary happening with your sensors!";
         private const string SlackUsername = "ICBA-Sensors-Information";
-        private static readonly string welcomingMessage = $"I will be reporting anything out of the ordinary happening with your sensors!";
         private const string SlackChannel = "#sensorsfeedback";
         private const string WebExceptionString = "Bad WebClient";
 
-        public static void PostMessage(string text, string username = SlackUsername, string channel = SlackChannel)
+        public void PostMessage(string text, string username = SlackUsername, string channel = SlackChannel)
         {
             Payload payload = new Payload()
             {
@@ -26,7 +26,7 @@ namespace ICBA.Services
             };
             PostMessage(payload);
         }
-        public static void PostMessage(Payload payload)
+        private void PostMessage(Payload payload)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace ICBA.Services
                 throw ex;
             }
         }
-        public static void PostWelcomingMessage()
+        public void PostWelcomingMessage()
         {
             PostMessage(username: SlackUsername,
                                text: welcomingMessage,

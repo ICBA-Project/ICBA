@@ -79,6 +79,9 @@ namespace ICBA.Web.App_Start
 
             kernel.Bind<ISensorsService>()
                 .To<SensorsService>().InRequestScope();
+
+            kernel.Bind<ISlackService>()
+                .To<SlackService>().InRequestScope();
         }
     }
 }

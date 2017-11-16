@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="../../Content/css/matrix-style.css" />
 
 @{
-    ICollection<string> measureTypes = new List<string>();
+    ICollection<string>
+        measureTypes = new List<string>
+            ();
     foreach (Sensor sensor in Model)
     {
         if (!measureTypes.Contains(sensor.MeasureType))
@@ -37,54 +39,49 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $(".chooseSensor").toggle();
-            $(".table2").toggle();
-            $(".widget-box").toggle();
-        });
+                $(document).ready(function () {
+                    $(".chooseSensor").toggle();
+                    $(".table2").toggle();
+                    $(".widget-box").toggle();
+                });
 
-        $(".table1").on("click", "td", function () {
-            let selected = $(this).text().trim();
-            if (selected == "°C") {
-                selected = "C";
-            }
-            if (selected == "%") {
-                selected = "perc";
-            }
-            if (selected == "(true/false)") {
-                selected = "truefalse";
-            }
-            $(".table1").toggle();
-            $(".chooseSensor").toggle();
-            $("." + selected).toggle();
-        });
+                $(".table1").on("click", "td", function () {
+                    let selected = $(this).text().trim();
+                    if (selected == "°C") {
+                        selected = "C";
+                    }
+                    if (selected == "%") {
+                        selected = "perc";
+                    }
+                    if (selected == "(true/false)") {
+                        selected = "truefalse";
+                    }
+                    $(".table1").toggle();
+                    $(".chooseSensor").toggle();
+                    $("." + selected).toggle();
+                });
 
-        $(".table2").on("click", ".tableRow", function () {
-            let selected = $(this).text().trim();
-            $(".chooseSensor").toggle();
-            var idOfParent = $(this).parents('table').attr('id');
-            $("#" + idOfParent).toggle();
-            $(".widget-box").toggle();
-            var values = selected.split("\n");
-            values = values.map(string => {
-                return string.trim()
-            })
-            values = arr = values.filter(function (n) { return n != '' });
-            $("#sensorId").html(values[0]);
-            $('#sensorName').attr("placeholder", values[1]);
-            $('#sensorDescription').attr("placeholder", values[2]);
-            $("#sensorUrl").html(values[3]);
-            $('#hiddenSensorUrl').attr("value", values[1]);
-            $("#sensorMeasureType").html(values[4]);
-            $('#sensorPollingInterval').attr("placeholder", parseInt(values[5]));
-            $('#sensorPollingInterval').attr("min", parseInt(values[5]));
-            $('#sensorMinValue').attr("placeholder", parseInt(values[6]));
-            $('#sensorMinValue').attr("min", parseInt(values[6]));
-            $('#sensorMinValue').attr("max", parseInt(values[7]));
-            $('#sensorMaxValue').attr("placeholder", parseInt(values[7]));
-            $('#sensorMaxValue').attr("min", parseInt(values[6]));
-            $('#sensorMaxValue').attr("max", parseInt(values[7]));
-        });
+                $(".table2").on("click", ".tableRow", function () {
+                    let selected = $(this).text().trim();
+                    $(".chooseSensor").toggle();
+                    var idOfParent = $(this).parents('table').attr('id');
+                    $("#" + idOfParent).toggle();
+                    $(".widget-box").toggle();
+                    var values = selected.split("\n");
+                    values = values.map(string => {
+                        return string.trim()
+                    })
+                    values = arr = values.filter(function (n) { return n != '' });
+                    $("#sensorId").html(values[0]);
+                    $('#sensorName').attr("value", values[1]);
+                    $('#sensorDescription').attr("value", values[2]);
+                    $("#sensorUrl").html(values[3]);
+                    $('#hiddenSensorUrl').attr("value", values[1]);
+                    $("#sensorMeasureType").html(values[4]);
+                    $('#sensorPollingInterval').attr("value", parseInt(values[5]));
+                    $('#sensorMinValue').attr("value", parseInt(values[6]));
+                    $('#sensorMaxValue').attr("value", parseInt(values[7]));
+                });
     </script>
 }
 
@@ -410,10 +407,10 @@
 <div class="widget-box">
     <div class="widget-title">
         <span class="icon"> <i class="icon-align-justify"></i> </span>
-        <h5>Sensor Registration</h5>
+        <h5>Edit Sensor</h5>
     </div>
     <div class="widget-content nopadding">
-        <form method="post" action="CreateSensor" class="form-horizontal">
+        <form method="post" action="EditSensor" class="form-horizontal">
             @Html.AntiForgeryToken()
             <div class="control-group" style="display: none;">
                 <label class="control-label">Id :</label>
