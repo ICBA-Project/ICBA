@@ -96,7 +96,6 @@
     <Compile Include="Controllers\SensorControllerTests\CreateSensor_Should.cs" />
     <Compile Include="Controllers\SensorControllerTests\OwnSensors.cs" />
     <Compile Include="Controllers\SensorControllerTests\PublicSensors_Should.cs" />
-    <Compile Include="DummyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
