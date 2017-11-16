@@ -20,7 +20,7 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
         {
             // Arrange
             Mock<ApplicationDbContext> mockApplicationDbContext = new Mock<ApplicationDbContext>();
-            
+
             Mock<SensorsService> mockSensorService = new Mock<SensorsService>(mockApplicationDbContext.Object);
 
             // Act
@@ -40,7 +40,7 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => new SensorController(null, mockApplicationDbContext.Object));
-            Assert.Throws<ArgumentNullException>(() => new SensorController(mockSensorApiService.Object,null));
+            Assert.Throws<ArgumentNullException>(() => new SensorController(mockSensorApiService.Object, null));
         }
     }
 }
