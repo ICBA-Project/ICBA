@@ -46,7 +46,7 @@ namespace ICBA.Web.Controllers
 
         public ActionResult PublicSensors(string id)
         {
-            SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
+            //SlackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb = new List<Sensor>();
             switch (id)
             {

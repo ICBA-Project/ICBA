@@ -44,8 +44,8 @@ namespace ICBA.Data
                 .WithRequired(h => h.Sensor);
         }
 
-        public DbSet<Sensor> Sensors { get; set; }
+        public virtual DbSet<Sensor> Sensors { get; set; }
 
-        public DbSet<SensorHistory> SensorHistory { get; set; }
+        public virtual DbSet<SensorHistory> SensorHistory { get; set; }
     }
 }
