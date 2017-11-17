@@ -23,9 +23,8 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             // Arrange
             Mock<ApplicationDbContext> mockApplicationDbContext = new Mock<ApplicationDbContext>();
 
-            SlackService slackService = new SlackService();
-            Mock<SensorsService> mockSensorService = new Mock<SensorsService>(mockApplicationDbContext.Object, slackService);
-
+            Mock<SlackService> mockSlackService = new Mock<SlackService>();
+            Mock<SensorsService> mockSensorService = new Mock<SensorsService>(mockApplicationDbContext.Object, mockSlackService.Object);
             // Act
             Sensor sensor1 = new Sensor() { OwnerId=null };
 
@@ -33,7 +32,7 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             var sensorsInDb = new Mock<DbSet<Sensor>>().SetupData(sensorsInDbMock);
             mockApplicationDbContext.SetupGet(s => s.Sensors).Returns(sensorsInDb.Object);
 
-            SensorController sensorController = new SensorController(mockSensorService.Object, mockApplicationDbContext.Object, slackService);
+            SensorController sensorController = new SensorController(mockSensorService.Object, mockApplicationDbContext.Object, mockSlackService.Object);
             //Assert
             sensorController.WithCallTo(s => s.CreateSensor()).ShouldRenderDefaultView()
                 .WithModel<List<Sensor>>(actual =>
