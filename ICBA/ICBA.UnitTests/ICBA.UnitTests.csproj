@@ -93,14 +93,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\SensorControllerTests\Constructor_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\CreateSensor_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\EditSensorHTTPPost_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\EditSensor_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\OwnSensors_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\PrivateSensors_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\PublicSensors_Should.cs" />
-    <Compile Include="Controllers\SensorControllerTests\SharedSensor_Should.cs" />
+    <Compile Include="Web\Areas\Admin\Controllers\AdminControllerTests\Counstructor_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\Constructor_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\CreateSensor_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\EditSensorHTTPPost_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\EditSensor_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\OwnSensors_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\PrivateSensors_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\PublicSensors_Should.cs" />
+    <Compile Include="Web\Controllers\SensorControllerTests\SharedSensor_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +124,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Web\Areas\Admin\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -26,6 +26,7 @@ namespace ICBA.Services
             };
             PostMessage(payload);
         }
+
         private void PostMessage(Payload payload)
         {
             try
@@ -46,13 +47,15 @@ namespace ICBA.Services
                 throw ex;
             }
         }
+
         public void PostWelcomingMessage()
         {
             PostMessage(username: SlackUsername,
                                text: welcomingMessage,
                                channel: SlackChannel);
         }
-        public class Payload
+
+        private class Payload
         {
             [JsonProperty("channel")]
             public string Channel { get; set; }

@@ -185,7 +185,7 @@ namespace ICBA.Web.Controllers
         [Authorize]
         public ActionResult EditSensor()
         {
-            slackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
+            //slackService.PostMessage("User " + this.User.Identity.Name + " requested " + this.Request.Url + " url @" + this.HttpContext.Timestamp + ".");
             IEnumerable<Sensor> sensorsInDb;
             if (this.User.IsInRole("Admin"))
             {
