@@ -93,6 +93,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Web\Areas\Admin\Controllers\AdminControllerTests\AdminPanel_Should.cs" />
     <Compile Include="Web\Areas\Admin\Controllers\AdminControllerTests\Counstructor_Should.cs" />
     <Compile Include="Web\Controllers\SensorControllerTests\Constructor_Should.cs" />
     <Compile Include="Web\Controllers\SensorControllerTests\CreateSensor_Should.cs" />
