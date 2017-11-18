@@ -27,8 +27,8 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             // Arrange
             Mock<ApplicationDbContext> mockApplicationDbContext = new Mock<ApplicationDbContext>();
 
-            SlackService slackService = new SlackService();
-            Mock<SensorsService> mockSensorService = new Mock<SensorsService>(mockApplicationDbContext.Object, slackService);
+            Mock<SlackService> slackService = new Mock<SlackService>();
+            Mock<SensorsService> mockSensorService = new Mock<SensorsService>(mockApplicationDbContext.Object, slackService.Object);
 
             string userName = "test";
             Sensor sensor1 = new Sensor() { OwnerId = userName };
@@ -44,7 +44,7 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             context.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
             mockIdentity.Setup(x => x.Name).Returns("test");
 
-            SensorController sensorController = new SensorController(mockSensorService.Object, mockApplicationDbContext.Object, slackService);
+            SensorController sensorController = new SensorController(mockSensorService.Object, mockApplicationDbContext.Object, slackService.Object);
             mockApplicationDbContext.SetupGet(s => s.Sensors).Returns(sensorsInDb.Object);
             mockApplicationDbContext.SetupGet(s => s.Users).Returns(usersInDb.Object);
             var userMock = new Mock<IPrincipal>();
@@ -66,7 +66,7 @@ namespace ICBA.UnitTests.Controllers.SensorControllerTests
             //    .WithModel<List<Sensor>>(actual =>
             //    {
             //        Assert.IsNotNull(actual);
-            //        CollectionAssert.AreEqual(sensorsInDb.Object.First().OwnerId, actual.First().OwnerId);
+            //        AreEqual(sensorsInDb.Object.First().OwnerId, actual.First().OwnerId);
             //    });
         }
     }
